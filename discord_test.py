@@ -1,15 +1,12 @@
 #導入Discord.py
 import discord
-import requests
 import pandas as pd
 import pickle
 import difflib
 from discord.ext import commands
-import ahocorasick
-from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import os
-import chardet
+import datetime
 # def build_actree(wordlist):
 #     actree = ahocorasick.Automaton()
 #     for index,word in enumerate(wordlist):
@@ -17,12 +14,12 @@ import chardet
 #     actree.make_automaton()
 #     return actree
 
-def build_actree(wordlist):
-    actree = ahocorasick.Automaton()
-    for index,word in enumerate(wordlist):
-        actree.add_word(str(word), (index, str(word)))
-    actree.make_automaton()
-    return actree
+# def build_actree(wordlist):
+#     actree = ahocorasick.Automaton()
+#     for index,word in enumerate(wordlist):
+#         actree.add_word(str(word), (index, str(word)))
+#     actree.make_automaton()
+#     return actree
 
 if __name__ == '__main__':
 
@@ -48,7 +45,7 @@ if __name__ == '__main__':
     intents = discord.Intents.default()
     intents.members = True
     client = discord.Client(intents=intents)
-    # client = commands.Bot(command_prefix='.',intents =intents)
+    # client = commands.Bot(command_prefix='$',intents =intents)
     
     # bot = discord.ext.commands.Bot(command_prefix = "your_prefix")
 
@@ -59,7 +56,7 @@ if __name__ == '__main__':
     #當機器人完成啟動時
     async def on_ready():
         print('目前登入身份：',client.user)
-
+    
     
     #新成員加入
     @client.event
@@ -147,17 +144,11 @@ if __name__ == '__main__':
                 else:
                     await message.reply("無相關資訊")
 
-        elif message.content.startswith('請問'):
-            user_word = message.content.replace('請問',"")
-            actree = build_actree(wordlist=basequestion_list)
-            send_list = [i[1][1] for i in actree.iter(user_word)]
-            if len(send_list) == 1:
-                wiki_url = f"https://ff14.huijiwiki.com/wiki/{base_knowledge[send_list[0]]}"
-                await message.reply(f"這篇可以參考看看~\n{wiki_url}", mention_author=True)
-            # elif len(send_list) == 0:
+        
 
 
 
         
-
+    # client.add_command(test)
     client.run(TOKEN) #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
+    
