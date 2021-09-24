@@ -4,22 +4,10 @@ import pandas as pd
 import pickle
 import difflib
 from discord.ext import commands
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import datetime
-# def build_actree(wordlist):
-#     actree = ahocorasick.Automaton()
-#     for index,word in enumerate(wordlist):
-#         actree.add_word(str(word), (index, str(word)))
-#     actree.make_automaton()
-#     return actree
 
-# def build_actree(wordlist):
-#     actree = ahocorasick.Automaton()
-#     for index,word in enumerate(wordlist):
-#         actree.add_word(str(word), (index, str(word)))
-#     actree.make_automaton()
-#     return actree
 
 if __name__ == '__main__':
 
@@ -28,10 +16,11 @@ if __name__ == '__main__':
     basequestion_list = ["籌備","晋升","復興","魂武","元靈","老主顧"]
     base_knowledge = {"籌備":"筹备军需品列表","晋升":"大国防联军","復興":"重建伊修加德","魂武":"元灵武器","元靈":"元灵武器","老主顧":"老主顾交易"}
     #讀取Token
-    load_dotenv()
-    TOKEN = os.getenv('DISCORD_TOKEN')
-    GUILDID_TOKEN = os.getenv('GUILDID_TOKEN')
-    
+    # load_dotenv()
+    # DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+    # GUILDID_TOKEN = os.getenv('GUILDID_TOKEN')
+    DISCORD_TOKEN = os.environ['DISCORD_TOKEN']
+    GUILDID_TOKEN = os.environ['GUILDID_TOKEN']
     #讀取字典
     with open("item_dict.pkl", "rb") as tf:
         item_dict = pickle.load(tf)
@@ -62,7 +51,7 @@ if __name__ == '__main__':
     @client.event
     #當有訊息時
     async def on_member_join(member):
-        guild = client.get_guild(GUILDID_TOKEN)
+        guild = client.get_guild(int(GUILDID_TOKEN))
         
         for channel in guild.channels:
         
@@ -150,5 +139,5 @@ if __name__ == '__main__':
 
         
     # client.add_command(test)
-    client.run(TOKEN) #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
+    client.run(DISCORD_TOKEN) #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
     
