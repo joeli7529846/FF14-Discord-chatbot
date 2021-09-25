@@ -7,7 +7,7 @@ from discord.ext import commands
 # from dotenv import load_dotenv
 import os
 import datetime
-
+import keep_alive
 
 if __name__ == '__main__':
 
@@ -139,5 +139,6 @@ if __name__ == '__main__':
 
         
     # client.add_command(test)
+    keep_alive.keep_alive()
     client.run(DISCORD_TOKEN) #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
     
