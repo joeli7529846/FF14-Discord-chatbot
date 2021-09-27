@@ -1,15 +1,9 @@
 #導入Discord.py
 import discord
-import requests
 import pandas as pd
 import pickle
 import difflib
 from discord.ext import commands
-import ahocorasick
-from bs4 import BeautifulSoup
-import bot
-import os
-import chardet
 from dotenv import load_dotenv
 
 
