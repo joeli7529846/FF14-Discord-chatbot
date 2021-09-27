@@ -5,7 +5,7 @@ import pickle
 import difflib
 from discord.ext import commands
 from dotenv import load_dotenv
-
+import os
 
 class main(commands.Cog):
     def __init__(self, bot):
