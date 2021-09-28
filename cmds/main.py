@@ -35,7 +35,7 @@ class main(commands.Cog):
     async def on_member_join(self,member):
         guild = self.bot.get_guild(self.GUILDID_TOKEN)
         for channel in guild.channels:
-            if channel.name == '一般':#<<記得改"一般"
+            if channel.name == '聊天大廳':#<<記得改"一般"
                 await channel.send(f"<@{member.id}> 你好呀:sunglasses:  請輸入你的遊戲ID，管理員看到就會把你加進公會~")
 
 
