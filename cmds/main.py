@@ -12,7 +12,7 @@ class main(commands.Cog):
         self.bot = bot
         load_dotenv()
         self.TOKEN = os.getenv('DISCORD_TOKEN')
-        self.GUILDID_TOKEN = os.getenv('GUILDID_TOKEN')
+        self.GUILDID_TOKEN = int(os.getenv('GUILDID_TOKEN'))
         #讀取字典
         with open("item_dict.pkl", "rb") as tf:
             self.item_dict = pickle.load(tf)
