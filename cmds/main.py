@@ -3,12 +3,9 @@ import discord
 import difflib
 from discord.ext import commands
 from core.classes import Cog_Extension
-class main(commands.Cog):
-    
-    
-    @commands.command(Cog_Extension)
-    async def ping(self,ctx):
-        await ctx.send('Pong!')
+
+
+class main(Cog_Extension):
 
     #調用event函式庫
     @commands.Cog.listener()
