@@ -1,24 +1,12 @@
 #導入Discord.py
 import discord
-import pandas as pd
-import pickle
 import difflib
 from discord.ext import commands
-from dotenv import load_dotenv
-import os
-
+from core.classes import Cog_Extension
 class main(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-        load_dotenv()
-        self.TOKEN = os.getenv('DISCORD_TOKEN')
-        self.GUILDID_TOKEN = int(os.getenv('GUILDID_TOKEN'))
-        #讀取字典
-        with open("item_dict.pkl", "rb") as tf:
-            self.item_dict = pickle.load(tf)
-        self.wordlist = [word for word in self.item_dict]
     
-    @commands.command()
+    
+    @commands.command(Cog_Extension)
     async def ping(self,ctx):
         await ctx.send('Pong!')
 
