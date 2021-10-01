@@ -1,4 +1,5 @@
 #導入Discord.py
+from _typeshed import Self
 import discord
 import difflib
 from discord.ext import commands
@@ -15,11 +16,15 @@ class main(Cog_Extension):
         print('目前登入身份：',self.bot.user)
         await bot_channel.send(f"我回來惹(*´∀`*)")
 
-    @commands.Cog.listener()
+    
     #當機器人完成啟動時
-    async def on_disconnect(self):
+    @commands.command(aliases=["quit"])
+    @commands.has_permissions(administrator=True)
+    async def close(ctx):
         bot_channel = self.bot.get_channel(int(780753727418138635))
         await bot_channel.send(f"開發者把我關掉了，請稍後QQ")
+        await self.bot.close()
+        
     
     #新成員加入
     @commands.Cog.listener()
