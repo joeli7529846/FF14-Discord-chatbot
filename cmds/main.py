@@ -11,14 +11,25 @@ class main(Cog_Extension):
     @commands.Cog.listener()
     #當機器人完成啟動時
     async def on_ready(self):
+        bot_channel = self.bot.get_channel(int(780753727418138635))
         print('目前登入身份：',self.bot.user)
+        await bot_channel.send(f"我回來惹(*´∀`*)")
 
+    
+    #當機器人完成啟動時
+    @commands.command(aliases=["quit"])
+    @commands.has_permissions(administrator=True)
+    async def close(self,ctx):
+        bot_channel = self.bot.get_channel(int(780753727418138635))
+        await bot_channel.send(f"開發者把我關掉了，請稍後QQ")
+        await self.bot.close()
+        
     
     #新成員加入
     @commands.Cog.listener()
     #當有訊息時
     async def on_member_join(self,member):
-        channel = self.bot.get_channel(int(887264861510328340))
+        channel = self.bot.get_channel(int(779782707080069193))
         await channel.send(f"<@{member.id}> 你好呀:sunglasses:  請輸入你的遊戲ID，管理員看到就會把你加進公會~")
 
 
