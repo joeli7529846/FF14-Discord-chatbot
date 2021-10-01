@@ -20,7 +20,7 @@ class main(Cog_Extension):
     #當機器人完成啟動時
     @commands.command(aliases=["quit"])
     @commands.has_permissions(administrator=True)
-    async def close(ctx):
+    async def close(self,ctx):
         bot_channel = self.bot.get_channel(int(780753727418138635))
         await bot_channel.send(f"開發者把我關掉了，請稍後QQ")
         await self.bot.close()
