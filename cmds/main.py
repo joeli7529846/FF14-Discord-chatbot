@@ -11,8 +11,15 @@ class main(Cog_Extension):
     @commands.Cog.listener()
     #當機器人完成啟動時
     async def on_ready(self):
+        bot_channel = self.bot.get_channel(int(780753727418138635))
         print('目前登入身份：',self.bot.user)
+        await bot_channel.send(f"我回來惹(*´∀`*)")
 
+    @commands.Cog.listener()
+    #當機器人完成啟動時
+    async def on_disconnect(self):
+        bot_channel = self.bot.get_channel(int(780753727418138635))
+        await bot_channel.send(f"開發者把我關掉了，請稍後QQ")
     
     #新成員加入
     @commands.Cog.listener()
