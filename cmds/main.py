@@ -1,5 +1,4 @@
 #導入Discord.py
-from _typeshed import Self
 import discord
 import difflib
 from discord.ext import commands
