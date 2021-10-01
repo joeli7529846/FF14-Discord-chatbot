@@ -24,7 +24,7 @@ class tasktiming(Cog_Extension):
         now_time = datetime.now().strftime('%m/%d-%H:%M')
         with open("setting.json",'r',encoding="utf8") as jfile:
             jdata = json.load(jfile)
-        # print(len(jdata))
+        print(len(jdata))
         if len(jdata) >0:
             #遍例每筆資料確認每筆時間
             for key in list(jdata):
@@ -82,7 +82,7 @@ class tasktiming(Cog_Extension):
         self.id = str(self.id)
         
         message_list = ctx.message.content.split()
-        # print(message_list)
+        print(message_list)
         if message_list[0] != "task":
             await ctx.send(f"格式輸入錯誤~\n參考指令範本: task 任務名稱 條件 10/2-20:00")
         if len(message_list) == 4:
