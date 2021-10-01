@@ -38,7 +38,7 @@ class tasktiming(Cog_Extension):
                     # print(remain_hour)
                     #剩餘時間小於一小時執行下面動作
                     if remain_hour < 1 :
-                        print("complete")
+                        # print("complete")
                         #在general頻道發通知
                         user_wordlist = ["有任務快開始囉~趕快來參加",f'任務名稱 : {jdata[key]["task"]}']+[f'時間 : {jdata[key]["time"]}']+[f'條件 : {jdata[key]["condition"]}' if "condition" in jdata[key] else '條件 : 無']+[f'[傳送門]( {jdata[key]["url"]})']
                     
@@ -86,7 +86,7 @@ class tasktiming(Cog_Extension):
         self.id = str(self.id)
         
         message_list = ctx.message.content.split()
-        print(message_list)
+        # print(message_list)
         if message_list[0] != "task":
             await ctx.send(f"格式輸入錯誤~\n參考指令範本: task 任務名稱 條件 10/2-20:00")
         if len(message_list) == 4:
