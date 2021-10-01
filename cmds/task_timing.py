@@ -87,8 +87,8 @@ class tasktiming(Cog_Extension):
         
         message_list = ctx.message.content.split()
         # print(message_list)
-        if message_list[0] != "task":
-            await ctx.send(f"格式輸入錯誤~\n參考指令範本: task 任務名稱 條件 10/2-20:00")
+        if message_list[0] != "/task":
+            await ctx.send(f"格式輸入錯誤~\n參考指令範本: /task 任務名稱 條件 10/2-20:00")
         if len(message_list) == 4:
             task_info = {self.id:{"task":message_list[1],"condition":message_list[2],"time":message_list[-1],"url":ctx.message.jump_url}}
             jdata.update(task_info)
@@ -102,7 +102,7 @@ class tasktiming(Cog_Extension):
             with open("setting.json",'w',encoding="utf8") as jfile:
                 jdata = json.dump(jdata,jfile,indent=4)
         else:
-            await ctx.send(f"格式輸入錯誤~\n參考指令範本: task 任務名稱 條件 10/2-20:00")
+            await ctx.send(f"格式輸入錯誤~\n參考指令範本: /task 任務名稱 條件 10/2-20:00")
         
         
         
