@@ -40,7 +40,7 @@ class tasktiming(Cog_Extension):
                     if remain_hour < 1 :
                         # print("complete")
                         #在general頻道發通知
-                        user_wordlist = ["有任務快開始囉~趕快來參加",f'任務名稱 : {jdata[key]["task"]}']+[f'時間 : {jdata[key]["time"]}']+[f'條件 : {jdata[key]["condition"]}' if "condition" in jdata[key] else '條件 : 無']+[f'[傳送門]( {jdata[key]["url"]})']
+                        user_wordlist = ["有任務快開始囉~趕快來參加",f'任務名稱 : {jdata[key]["task"]}']+[f'時間 : {jdata[key]["time"]}']+[f'備註 : {jdata[key]["condition"]}' if "condition" in jdata[key] else '備註 : 無']+[f'[傳送門]( {jdata[key]["url"]})']
                     
                         embed.description = "\n".join(user_wordlist)
                         await self.generalchannel.send(embed=embed)
@@ -72,7 +72,7 @@ class tasktiming(Cog_Extension):
     #訊息範本 : task 藏寶圖G12 主線5.0有80等腳色 10/2-20:00
     async def task(self,ctx):
         self.count = 0
-        
+        error_message = f"格式輸入錯誤~\n參考指令範本: /task | 任務名稱 | 備註 | 10/2-20:00"
 
         with open("setting.json",'r',encoding="utf8") as jfile:
             jdata = json.load(jfile)
@@ -85,24 +85,38 @@ class tasktiming(Cog_Extension):
         # print(condition)
         self.id = str(self.id)
         
-        message_list = ctx.message.content.split()
-        # print(message_list)
-        if message_list[0] != "/task":
-            await ctx.send(f"格式輸入錯誤~\n參考指令範本: /task 任務名稱 條件 10/2-20:00")
+        message_list = ctx.message.content.split("|")
+        #前處理訊息，把開頭結尾空格拿掉
+        prifix_name = message_list[0].lstrip().rstrip()
+        task_name = message_list[1].lstrip().rstrip()
+        condition_name = message_list[2].lstrip().rstrip()
+        time_name = message_list[3].lstrip().rstrip()
+        
+        # 確認每項資訊符合規則
+        if prifix_name != "/task":
+            await ctx.send(error_message)
+        
+        try:
+            datetime.strptime(time_name, '%m/%d-%H:%M')
+        except BaseException:
+            await ctx.send(error_message)
+        
         if len(message_list) == 4:
-            task_info = {self.id:{"task":message_list[1],"condition":message_list[2],"time":message_list[-1],"url":ctx.message.jump_url}}
+            
+            task_info = {self.id:{"task":task_name,"condition":condition_name,"time":time_name,"url":ctx.message.jump_url}}
             jdata.update(task_info)
             
             with open("setting.json",'w',encoding="utf8") as jfile:
                 jdata = json.dump(jdata,jfile,indent=4)
+
         elif len(message_list) == 3:
-            task_info = {self.id:{"task":message_list[1],"time":message_list[-1],"url":ctx.message.jump_url}}
+            task_info = {self.id:{"task":task_name,"time":time_name,"url":ctx.message.jump_url}}
             jdata.update(task_info)
             
             with open("setting.json",'w',encoding="utf8") as jfile:
                 jdata = json.dump(jdata,jfile,indent=4)
         else:
-            await ctx.send(f"格式輸入錯誤~\n參考指令範本: /task 任務名稱 條件 10/2-20:00")
+            await ctx.send(error_message)
         
         
         
