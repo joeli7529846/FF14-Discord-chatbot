@@ -35,7 +35,7 @@ class tasktiming(Cog_Extension):
                 # print(key, ":", jdata[key])
                 if datetime.strptime(now_time, '%m/%d-%H:%M') < datetime.strptime(jdata[key]["time"], '%m/%d-%H:%M'):
                     remain_hour = datetime.strptime(jdata[key]["time"], '%m/%d-%H:%M')-datetime.strptime(now_time, '%m/%d-%H:%M')
-                    remain_hour = remain_hour.seconds/3600#轉成小時
+                    remain_hour = remain_hour.total_seconds()/3600#轉成小時
                     # print(remain_hour)
                     #剩餘時間小於一小時執行下面動作
                     if remain_hour < 1 :
