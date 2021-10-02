@@ -16,7 +16,7 @@ class main(Cog_Extension):
         await bot_channel.send(f"我回來惹(*´∀`*)")
 
     
-    #當機器人完成啟動時
+    
     @commands.command(aliases=["quit"])
     @commands.has_permissions(administrator=True)
     async def close(self,ctx):

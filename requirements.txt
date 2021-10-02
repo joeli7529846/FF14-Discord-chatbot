@@ -3,3 +3,4 @@ flask
 dotenvpython-dotenv
 pandas
 requests
+sklearn

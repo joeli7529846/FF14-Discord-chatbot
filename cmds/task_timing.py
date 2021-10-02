@@ -67,7 +67,7 @@ class tasktiming(Cog_Extension):
         self.channel = self.bot.get_channel(ch)
         await ctx.send(f"set channel:{self.channel.mention}")
 
-
+    
 
     @commands.command()
     #訊息範本 : task 藏寶圖G12 主線5.0有80等腳色 10/2-20:00
