@@ -42,8 +42,8 @@ class main(Cog_Extension):
 
         noh_sim = self.tf_similarity(message.content, "不可以色色")
         okh_sim = self.tf_similarity(message.content, "可以色色")
-        print(noh_sim)
-        print(okh_sim)
+        # print(noh_sim)
+        # print(okh_sim)
         #不可以色色排組對應圖片
         if noh_sim > 0.7 and noh_sim > okh_sim:
             if "可以色色" and "不可以色色" in self.table:
