@@ -87,16 +87,17 @@ class tasktiming(Cog_Extension):
         self.id = str(self.id)
         
         message_list = ctx.message.content.split("|")
-        #前處理訊息，把開頭結尾空格拿掉
-        prifix_name = message_list[0].lstrip().rstrip()
-        task_name = message_list[1].lstrip().rstrip()
-        condition_name = message_list[2].lstrip().rstrip()
-        time_name = message_list[3].lstrip().rstrip()
+        
         
         
         
         
         if len(message_list) == 4:
+            #前處理訊息，把開頭結尾空格拿掉
+            prifix_name = message_list[0].lstrip().rstrip()
+            task_name = message_list[1].lstrip().rstrip()
+            condition_name = message_list[2].lstrip().rstrip()
+            time_name = message_list[3].lstrip().rstrip()
             # 確認每項資訊符合規則
             if prifix_name != "/task":
                 await ctx.message.reply(f"前綴輸入錯誤"+error_message)
@@ -119,6 +120,11 @@ class tasktiming(Cog_Extension):
                 jdata = json.dump(jdata,jfile,indent=4)
 
         elif len(message_list) == 3:
+            #前處理訊息，把開頭結尾空格拿掉
+            prifix_name = message_list[0].lstrip().rstrip()
+            task_name = message_list[1].lstrip().rstrip()
+            condition_name = message_list[2].lstrip().rstrip()
+            time_name = message_list[3].lstrip().rstrip()
             # 確認每項資訊符合規則
             if prifix_name != "/task":
                 await ctx.message.reply(f"前綴輸入錯誤"+error_message)
