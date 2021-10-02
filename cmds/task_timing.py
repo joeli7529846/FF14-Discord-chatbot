@@ -72,7 +72,7 @@ class tasktiming(Cog_Extension):
     #訊息範本 : task 藏寶圖G12 主線5.0有80等腳色 10/2-20:00
     async def task(self,ctx):
         self.count = 0
-        error_message = f"格式輸入錯誤~\n參考指令範本: /task | 任務名稱 | 備註 | 10/2-20:00"
+        error_message = f"\n參考指令範本: /task | 任務名稱 | 備註 | 10/2-20:00"
 
         with open("setting.json",'r',encoding="utf8") as jfile:
             jdata = json.load(jfile)
@@ -94,12 +94,19 @@ class tasktiming(Cog_Extension):
         
         # 確認每項資訊符合規則
         if prifix_name != "/task":
-            await ctx.send(error_message)
+            await ctx.message.reply(f"前綴輸入錯誤"+error_message)
         
         try:
             datetime.strptime(time_name, '%m/%d-%H:%M')
         except BaseException:
-            await ctx.send(error_message)
+            await ctx.message.reply("時間格式輸入錯誤"+error_message)
+
+        now_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+        now_time = now_time.astimezone(timezone(timedelta(hours=8)))
+        now_time = now_time.strftime('%m/%d-%H:%M')
+        if datetime.strptime(now_time, '%m/%d-%H:%M') < datetime.strptime(time_name, '%m/%d-%H:%M'):
+            await ctx.message.reply("你填的時間比現在時間早~")
+        
         
         if len(message_list) == 4:
             
@@ -116,7 +123,7 @@ class tasktiming(Cog_Extension):
             with open("setting.json",'w',encoding="utf8") as jfile:
                 jdata = json.dump(jdata,jfile,indent=4)
         else:
-            await ctx.send(error_message)
+            await ctx.message.reply("超出已知範圍囉~"+error_message)
         
         
         
