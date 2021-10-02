@@ -6,6 +6,7 @@ from random import choice
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 from scipy.linalg import norm
+np.seterr(divide='ignore',invalid='ignore')
 class main(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
