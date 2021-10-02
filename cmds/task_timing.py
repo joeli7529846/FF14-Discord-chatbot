@@ -12,7 +12,8 @@ class tasktiming(Cog_Extension):
         self.count=0
         self.id = 0
         
-    
+
+        
     @tasks.loop(seconds=10)
     async def tasktime(self):
         embed = discord.Embed()
@@ -92,23 +93,24 @@ class tasktiming(Cog_Extension):
         condition_name = message_list[2].lstrip().rstrip()
         time_name = message_list[3].lstrip().rstrip()
         
-        # 確認每項資訊符合規則
-        if prifix_name != "/task":
-            await ctx.message.reply(f"前綴輸入錯誤"+error_message)
         
-        try:
-            datetime.strptime(time_name, '%m/%d-%H:%M')
-        except BaseException:
-            await ctx.message.reply("時間格式輸入錯誤"+error_message)
-
-        now_time = datetime.utcnow().replace(tzinfo=timezone.utc)
-        now_time = now_time.astimezone(timezone(timedelta(hours=8)))
-        now_time = now_time.strftime('%m/%d-%H:%M')
-        if datetime.strptime(now_time, '%m/%d-%H:%M') < datetime.strptime(time_name, '%m/%d-%H:%M'):
-            await ctx.message.reply("你填的時間比現在時間早~")
         
         
         if len(message_list) == 4:
+            # 確認每項資訊符合規則
+            if prifix_name != "/task":
+                await ctx.message.reply(f"前綴輸入錯誤"+error_message)
+            
+            try:
+                datetime.strptime(time_name, '%m/%d-%H:%M')
+            except BaseException:
+                await ctx.message.reply("時間格式輸入錯誤"+error_message)
+
+            now_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+            now_time = now_time.astimezone(timezone(timedelta(hours=8)))
+            now_time = now_time.strftime('%m/%d-%H:%M')
+            if datetime.strptime(now_time, '%m/%d-%H:%M') > datetime.strptime(time_name, '%m/%d-%H:%M'):
+                await ctx.message.reply("你填的時間比現在時間早~")
             
             task_info = {self.id:{"task":task_name,"condition":condition_name,"time":time_name,"url":ctx.message.jump_url}}
             jdata.update(task_info)
@@ -117,13 +119,28 @@ class tasktiming(Cog_Extension):
                 jdata = json.dump(jdata,jfile,indent=4)
 
         elif len(message_list) == 3:
+            # 確認每項資訊符合規則
+            if prifix_name != "/task":
+                await ctx.message.reply(f"前綴輸入錯誤"+error_message)
+            
+            try:
+                datetime.strptime(time_name, '%m/%d-%H:%M')
+            except BaseException:
+                await ctx.message.reply("時間格式輸入錯誤"+error_message)
+
+            now_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+            now_time = now_time.astimezone(timezone(timedelta(hours=8)))
+            now_time = now_time.strftime('%m/%d-%H:%M')
+            if datetime.strptime(now_time, '%m/%d-%H:%M') > datetime.strptime(time_name, '%m/%d-%H:%M'):
+                await ctx.message.reply("你填的時間比現在時間早~")
+
             task_info = {self.id:{"task":task_name,"time":time_name,"url":ctx.message.jump_url}}
             jdata.update(task_info)
             
             with open("setting.json",'w',encoding="utf8") as jfile:
                 jdata = json.dump(jdata,jfile,indent=4)
         else:
-            await ctx.message.reply("超出已知範圍囉~"+error_message)
+            await ctx.message.reply("格式輸入錯誤~"+error_message)
         
         
         
