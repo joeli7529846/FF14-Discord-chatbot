@@ -16,7 +16,7 @@ class tasktiming(Cog_Extension):
         
     @tasks.loop(seconds=10)
     async def tasktime(self):
-        embed = discord.Embed()
+        
         self.generalchannel = self.bot.get_channel(779782707080069193)#記得改成功會generalID
         
         self.channel = self.bot.get_channel(887264861510328340)#記得改糾團頻道ID
@@ -41,10 +41,19 @@ class tasktiming(Cog_Extension):
                     if remain_hour < 1 :
                         # print("complete")
                         #在general頻道發通知
-                        user_wordlist = ["有任務快開始囉~趕快來參加",f'任務名稱 : {jdata[key]["task"]}']+[f'時間 : {jdata[key]["time"]}']+[f'備註 : {jdata[key]["condition"]}' if "condition" in jdata[key] else '備註 : 無']+[f'[傳送門]( {jdata[key]["url"]})']
-                    
-                        embed.description = "\n".join(user_wordlist)
+                        # user_wordlist = ["有任務快開始囉~趕快來參加",f'任務名稱 : {jdata[key]["task"]}']+[f'時間 : {jdata[key]["time"]}']+[f'備註 : {jdata[key]["condition"]}' if "condition" in jdata[key] else '備註 : 無']+[f'[傳送門]( {jdata[key]["url"]})']
+                        embed=discord.Embed(title=":loudspeaker: "+jdata[key]["task"], 
+                                            url=jdata[key]["url"], 
+                                            description=jdata[key]["condition"], 
+                                            color=discord.Color.red())
+                        embed.add_field(name=":calendar: 時間", 
+                                        value=jdata[key]["time"], 
+                                        inline=False)
+                        
+                        
+                        # embed.description = "\n".join(user_wordlist)
                         await self.generalchannel.send(embed=embed)
+                        
                         self.count=1
                         del jdata[key]
                         with open("setting.json",'w',encoding="utf8") as jfile:
