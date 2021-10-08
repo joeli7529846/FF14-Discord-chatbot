@@ -11,8 +11,8 @@ class draw(Cog_Extension):
     async def draw(self,ctx):
         member_list = []
         for user in ctx.guild.members:
-            print(user.status)
-            if str(user.status) != "offline":
+            
+            if str(user.status) == "offline":
                 member_list.append(str(user.status))
         await ctx.message.reply(choice(member_list))
 def setup(bot):
