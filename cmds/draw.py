@@ -10,6 +10,7 @@ class draw(Cog_Extension):
     
     async def draw(self,ctx):
         member_list = []
+        print(ctx.guild.members())
         async for user in ctx.guild.members():
             
             if str(user.status) != "offline":
