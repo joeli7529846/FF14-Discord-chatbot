@@ -16,7 +16,7 @@ class draw(Cog_Extension):
             
             if str(user.status) != "offline":
                 # print(user)
-                member_list.append(f"<@{user.id}")
+                member_list.append(f"<@{user.id}>")
         await ctx.message.reply(choice(member_list))
 def setup(bot):
     bot.add_cog(draw(bot))
