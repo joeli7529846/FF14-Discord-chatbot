@@ -12,7 +12,7 @@ class draw(Cog_Extension):
         member_list = []
         async for user in ctx.guild.fetch_members(limit=None):
             
-            if str(user.status) != "offline":
+            if str(user.status) == "offline":
                 print(user)
                 member_list.append(str(user))
         await ctx.message.reply(choice(member_list))
