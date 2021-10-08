@@ -15,7 +15,7 @@ class draw(Cog_Extension):
         for user in guild.members:
             
             if str(user.status) != "offline":
-                print(user)
+                # print(user)
                 member_list.append(str(user))
         await ctx.message.reply(choice(member_list))
 def setup(bot):
