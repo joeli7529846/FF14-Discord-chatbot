@@ -11,8 +11,8 @@ class draw(Cog_Extension):
     async def draw(self,ctx):
         member_list = []
         guild = self.bot.get_guild(779782707080069190)
-        print(guild.members())
-        for user in guild.members():
+        print(guild.members)
+        for user in guild.members:
             
             if str(user.status) != "offline":
                 print(user)
