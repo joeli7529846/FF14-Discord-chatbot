@@ -13,7 +13,7 @@ class main(Cog_Extension):
     async def on_ready(self):
         bot_channel = self.bot.get_channel(int(780753727418138635))
         print('目前登入身份：',self.bot.user)
-        await bot_channel.send(f"我回來惹(*´∀`*)")
+        # await bot_channel.send(f"我回來惹(*´∀`*)")
 
     
     
