@@ -10,7 +10,7 @@ class draw(Cog_Extension):
     
     async def draw(self,ctx):
         member_list = []
-        guild = self.bot.get_guild(self.GUILDID_TOKENd)
+        guild = self.bot.get_guild(int(self.GUILDID_TOKENd))
         print(ctx.guild.members())
         async for user in guild.members():
             
