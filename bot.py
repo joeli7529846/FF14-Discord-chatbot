@@ -6,7 +6,7 @@ import os
 
 if __name__ == '__main__':
 
-    intents = discord.Intents.default()
+    intents = discord.Intents.all()
     intents.members = True
     bot = commands.Bot(command_prefix='/',intents =intents)
 
