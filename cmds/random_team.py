@@ -49,12 +49,15 @@ class random_team(Cog_Extension):
             embed.add_field(name="ST", 
                             value=team_list[1], 
                             inline=True)
-            embed.add_field('\u200b', '\u200b')
-            embed.add_field(inline=True)
+            embed.add_field(name="", 
+                            value="", 
+                            inline=True)
             embed.add_field(name="D2", 
                             value=team_list[3], 
                             inline=True)
-            embed.add_field(inline=True)
+            embed.add_field(name="", 
+                            value="", 
+                            inline=True)
             embed.add_field(name="D3", 
                             value=team_list[4], 
                             inline=True)
@@ -62,7 +65,9 @@ class random_team(Cog_Extension):
             embed.add_field(name="D4", 
                             value=team_list[5], 
                             inline=True)
-            embed.add_field(inline=True)
+            embed.add_field(name="", 
+                            value="", 
+                            inline=True)
             embed.add_field(name="H1", 
                             value=team_list[6], 
                             inline=True)
