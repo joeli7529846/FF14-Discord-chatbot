@@ -27,7 +27,7 @@ class random_team(Cog_Extension):
         if member_count == 4:
             embed=discord.Embed(title="四人副本", 
                                 color=discord.Color.red())
-            embed.add_field(name="MT", 
+            embed.add_field(name=":tank:MT", 
                             value=team_list[0], 
                             inline=False)
             embed.add_field(name="D1", 
@@ -43,10 +43,10 @@ class random_team(Cog_Extension):
         elif member_count == 8:
             embed=discord.Embed(title="八人副本", 
                                 color=discord.Color.red())
-            embed.add_field(name="MT", 
+            embed.add_field(name=":tank:MT", 
                             value=team_list[0], 
                             inline=True)
-            embed.add_field(name="ST", 
+            embed.add_field(name=":tank:ST", 
                             value=team_list[1], 
                             inline=True)
             embed.add_field(name="", 
