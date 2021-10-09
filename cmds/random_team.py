@@ -43,20 +43,24 @@ class random_team(Cog_Extension):
         elif member_count == 8:
             embed=discord.Embed(title="八人副本", 
                                 color=discord.Color.red())
-            embed.add_field(name=":tank:MT", 
+            embed.add_field(name=":tank:", 
+                            value='坦職', 
+                            inline=True)
+            embed.add_field(name="MT", 
                             value=team_list[0], 
                             inline=True)
-            embed.add_field(name=":tank:ST", 
+            embed.add_field(name="ST", 
                             value=team_list[1], 
                             inline=True)
-            embed.add_field(name="", 
-                            value='\u200', 
+            embed.add_field(name=":dps:", 
+                            value='輸出', 
                             inline=True)
+            
             embed.add_field(name="D2", 
                             value=team_list[3], 
                             inline=True)
-            embed.add_field(name="", 
-                            value='\u200', 
+            embed.add_field(name=":dps:", 
+                            value='輸出', 
                             inline=True)
             embed.add_field(name="D3", 
                             value=team_list[4], 
@@ -65,8 +69,8 @@ class random_team(Cog_Extension):
             embed.add_field(name="D4", 
                             value=team_list[5], 
                             inline=True)
-            embed.add_field(name="", 
-                            value='\u200', 
+            embed.add_field(name=":Healerbtw:", 
+                            value='補師', 
                             inline=True)
             embed.add_field(name="H1", 
                             value=team_list[6], 
