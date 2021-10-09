@@ -56,7 +56,7 @@ class random_team(Cog_Extension):
                             value='輸出', 
                             inline=True)
             embed.add_field(name="D1", 
-                            value=team_list[3], 
+                            value=team_list[2], 
                             inline=True)
             embed.add_field(name="D2", 
                             value=team_list[3], 
