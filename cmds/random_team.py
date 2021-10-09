@@ -27,23 +27,23 @@ class random_team(Cog_Extension):
         if member_count == 4:
             embed=discord.Embed(title="四人副本", 
                                 color=discord.Color.red())
-            embed.add_field(name=":tank:MT", 
+            embed.add_field(name="🛡️MT", 
                             value=team_list[0], 
                             inline=False)
-            embed.add_field(name="D1", 
+            embed.add_field(name="⚔️D1", 
                             value=team_list[1], 
                             inline=True)
-            embed.add_field(name="D2", 
+            embed.add_field(name="⚔️D2", 
                             value=team_list[2], 
                             inline=True)
-            embed.add_field(name="H1", 
+            embed.add_field(name="💖H1", 
                             value=team_list[3], 
                             inline=False)
         
         elif member_count == 8:
             embed=discord.Embed(title="八人副本", 
                                 color=discord.Color.red())
-            embed.add_field(name=":tank:", 
+            embed.add_field(name="🛡️", 
                             value='坦職', 
                             inline=True)
             embed.add_field(name="MT", 
@@ -52,14 +52,16 @@ class random_team(Cog_Extension):
             embed.add_field(name="ST", 
                             value=team_list[1], 
                             inline=True)
-            embed.add_field(name=":dps:", 
+            embed.add_field(name="⚔️", 
                             value='輸出', 
                             inline=True)
-            
+            embed.add_field(name="D1", 
+                            value=team_list[3], 
+                            inline=True)
             embed.add_field(name="D2", 
                             value=team_list[3], 
                             inline=True)
-            embed.add_field(name=":dps:", 
+            embed.add_field(name="⚔️", 
                             value='輸出', 
                             inline=True)
             embed.add_field(name="D3", 
@@ -69,7 +71,7 @@ class random_team(Cog_Extension):
             embed.add_field(name="D4", 
                             value=team_list[5], 
                             inline=True)
-            embed.add_field(name=":Healerbtw:", 
+            embed.add_field(name="💖", 
                             value='補師', 
                             inline=True)
             embed.add_field(name="H1", 
