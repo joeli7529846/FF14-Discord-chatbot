@@ -28,6 +28,8 @@ class ask(Cog_Extension):
         #df 存成字典格式
         qa_dict = pd.Series(df.answer.values,index=df.question).to_dict()
         question_list = df["question"].tolist()
+        print(qa_dict)
+        print(question_list)
 
         return qa_dict,question_list
     
