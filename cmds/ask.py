@@ -12,7 +12,7 @@ np.seterr(divide='ignore',invalid='ignore')
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.qa_dict,self.question_list = ask.read_gsheet()
+        self.qa_dict,self.question_list = ask.read_gsheet(self)
         self.table=[]
         self.nohokh = ["https://i.imgur.com/cZksr04.jpg","https://i.imgur.com/wH4CJLF.jpg","https://i.imgur.com/ag0DVMT.jpg"]
     
