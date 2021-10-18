@@ -32,22 +32,20 @@ class ask(Cog_Extension):
     
     @commands.Cog.listener()
     #當有訊息時
-    async def on_message(self,message):
+    async def ask(self,ctx):
         embed = discord.Embed()
-        #排除自己的訊息，避免陷入無限循環
-        if message.author == self.bot.user:
-            return
+        
         
         #先從questionlist搜尋相似的問題
-        wordsim_list = difflib.get_close_matches(message.content,self.question_list,5,cutoff=0.5)
+        wordsim_list = difflib.get_close_matches(ctx.message.content,self.question_list,5,cutoff=0.5)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
-            await message.reply(embed=embed, mention_author=True)
+            await ctx.message.content.reply(embed=embed, mention_author=True)
         elif len(wordsim_list) > 1:
             embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
-            await message.reply(embed=embed, mention_author=True)
+            await ctx.message.content.reply(embed=embed, mention_author=True)
         else:
-            await message.reply("窩不知道")
+            await ctx.message.content.reply("窩不知道")
         
         
 
