@@ -2,17 +2,13 @@ import pandas as pd
 from discord.ext import commands
 from core.classes import Cog_Extension
 import discord
-from random import choice
-from sklearn.feature_extraction.text import CountVectorizer
-import numpy as np
-from scipy.linalg import norm
 import pygsheets
 import difflib
-np.seterr(divide='ignore',invalid='ignore')
-class main(Cog_Extension):
+
+class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.qa_dict,self.question_list = main.read_gsheet(self)
+        self.qa_dict,self.question_list = ask.read_gsheet(self)
         
     
     def read_gsheet(self):
@@ -31,19 +27,6 @@ class main(Cog_Extension):
 
         return qa_dict,question_list
     
-    
-    def tf_similarity(self,s1, s2):
-        def add_space(s):
-            return ' '.join(list(s))
-
-        # 將字中間加入空格
-        s1, s2 = add_space(s1), add_space(s2)
-        # 轉化為TF矩陣
-        cv = CountVectorizer(tokenizer=lambda s: s.split())
-        corpus = [s1, s2]
-        vectors = cv.fit_transform(corpus).toarray()
-        # 計算TF係數
-        return np.dot(vectors[0], vectors[1]) / (norm(vectors[0]) * norm(vectors[1]))
     
     
     
@@ -70,4 +53,4 @@ class main(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(main(bot))
+    bot.add_cog(ask(bot))
