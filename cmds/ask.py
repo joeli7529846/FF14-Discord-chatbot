@@ -12,7 +12,7 @@ np.seterr(divide='ignore',invalid='ignore')
 class main(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.qa_dict,self.question_list = ask.read_gsheet(self)
+        self.qa_dict,self.question_list = main.read_gsheet(self)
         
     
     def read_gsheet(self):
