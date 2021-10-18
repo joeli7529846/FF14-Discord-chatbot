@@ -9,12 +9,11 @@ from scipy.linalg import norm
 import pygsheets
 import difflib
 np.seterr(divide='ignore',invalid='ignore')
-class ask(Cog_Extension):
+class main(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.qa_dict,self.question_list = ask.read_gsheet(self)
-        self.table=[]
-        self.nohokh = ["https://i.imgur.com/cZksr04.jpg","https://i.imgur.com/wH4CJLF.jpg","https://i.imgur.com/ag0DVMT.jpg"]
+        
     
     def read_gsheet(self):
         gc = pygsheets.authorize(service_account_file='google_apikey.json')
@@ -28,8 +27,7 @@ class ask(Cog_Extension):
         #df 存成字典格式
         qa_dict = pd.Series(df.answer.values,index=df.question).to_dict()
         question_list = df["question"].tolist()
-        print(qa_dict)
-        print(question_list)
+        
 
         return qa_dict,question_list
     
@@ -72,4 +70,4 @@ class ask(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(ask(bot))
+    bot.add_cog(main(bot))
