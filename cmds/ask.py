@@ -28,9 +28,7 @@ class ask(Cog_Extension):
         return qa_dict,question_list
     
     
-    
-    
-    @commands.Cog.listener()
+    @commands.command()
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
