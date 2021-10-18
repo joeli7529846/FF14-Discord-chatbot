@@ -38,6 +38,8 @@ class ask(Cog_Extension):
         wordsim_list = difflib.get_close_matches(ctx.message.content,self.question_list,5,cutoff=0.5)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
+            if "http" in ctx.message.content:
+                await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             await ctx.message.reply(embed=embed, mention_author=True)
         elif len(wordsim_list) > 1:
             embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
