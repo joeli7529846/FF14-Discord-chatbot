@@ -4,12 +4,24 @@ from core.classes import Cog_Extension
 import discord
 import pygsheets
 import difflib
-
+from random import choice
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.qa_dict,self.question_list = ask.read_gsheet(self)
-        
+        self.idn=["https://i.imgur.com/M9hQgZC.gif",
+                  "https://i.imgur.com/2VXiwMW.jpg",
+                  "https://i.imgur.com/dAV35RN.jpg",
+                  "https://i.imgur.com/cd4v2yA.jpg",
+                  "https://i.imgur.com/YvMmcBf.jpg",
+                  "http://i.imgur.com/DJ8lE9L.jpg",
+                  "https://i.imgur.com/FeVL45J.jpg",
+                  "https://i.imgur.com/37u7gfR.gif",
+                  "https://i.imgur.com/WtYPzMt.png",
+                  "http://i.imgur.com/7Za5hZA.jpg",
+                  "https://i.imgur.com/BtVDnpT.jpg",
+                  "https://i.imgur.com/TSfPO49.jpg",
+                  "http://i.imgur.com/RecpaoD.jpg"]
     
     def read_gsheet(self):
         gc = pygsheets.authorize(service_account_file='google_apikey.json')
@@ -40,12 +52,19 @@ class ask(Cog_Extension):
             embed.description = self.qa_dict[wordsim_list[0]]
             if "macro" in wordsim_list[0]:
                 await ctx.message.reply(embed=embed, mention_author=True)
-            await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
+            else:
+                await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
         elif len(wordsim_list) > 1:
+            if ctx.message.content in wordsim_list:
+                if "macro" in wordsim_list[0]:
+                    await ctx.message.reply(embed=embed, mention_author=True)
+                else:
+                    await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
+
             embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
             await ctx.message.reply(embed=embed, mention_author=True)
         else:
-            await ctx.message.reply("窩不知道")
+            await ctx.message.reply(choice(self.idn))
         
         
 
