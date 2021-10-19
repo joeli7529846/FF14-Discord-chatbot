@@ -56,13 +56,14 @@ class ask(Cog_Extension):
                 await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
         elif len(wordsim_list) > 1:
             if ctx.message.content in wordsim_list:
+                embed.description = self.qa_dict[wordsim_list[0]]
                 if "macro" in wordsim_list[0]:
                     await ctx.message.reply(embed=embed, mention_author=True)
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
-
-            embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
-            await ctx.message.reply(embed=embed, mention_author=True)
+            else:
+                embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
+                await ctx.message.reply(embed=embed, mention_author=True)
         else:
             await ctx.message.reply(choice(self.idn))
         
