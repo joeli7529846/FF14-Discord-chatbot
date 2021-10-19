@@ -44,10 +44,10 @@ class ask(Cog_Extension):
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
-        
+        word = ctx.message.content.replace("/ask ","")
         
         #先從questionlist搜尋相似的問題
-        wordsim_list = difflib.get_close_matches(ctx.message.content,self.question_list,5,cutoff=0.2)
+        wordsim_list = difflib.get_close_matches(word,self.question_list,5,cutoff=0.2)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
             if "macro" in wordsim_list[0]:
@@ -55,9 +55,9 @@ class ask(Cog_Extension):
             else:
                 await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
         elif len(wordsim_list) > 1:
-            print(ctx.message.content)
-            if ctx.message.content in wordsim_list:
-                print(ctx.message.content)
+            
+            if word in wordsim_list:
+                
                 embed.description = self.qa_dict[wordsim_list[0]]
                 if "macro" in wordsim_list[0]:
                     await ctx.message.reply(embed=embed, mention_author=True)
