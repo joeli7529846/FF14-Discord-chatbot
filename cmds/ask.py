@@ -55,7 +55,9 @@ class ask(Cog_Extension):
             else:
                 await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
         elif len(wordsim_list) > 1:
+            print(ctx.message.content)
             if ctx.message.content in wordsim_list:
+                print(ctx.message.content)
                 embed.description = self.qa_dict[wordsim_list[0]]
                 if "macro" in wordsim_list[0]:
                     await ctx.message.reply(embed=embed, mention_author=True)
