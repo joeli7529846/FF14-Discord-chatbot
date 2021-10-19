@@ -35,7 +35,7 @@ class ask(Cog_Extension):
         
         
         #先從questionlist搜尋相似的問題
-        wordsim_list = difflib.get_close_matches(ctx.message.content,self.question_list,5,cutoff=0.5)
+        wordsim_list = difflib.get_close_matches(ctx.message.content,self.question_list,5,cutoff=0.2)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
             if "http" in ctx.message.content:
