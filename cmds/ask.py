@@ -52,8 +52,7 @@ class ask(Cog_Extension):
             
     
     
-    @commands.command(name = "pagination",
-    aliases = ["pages"])
+    @commands.command()
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
@@ -140,7 +139,7 @@ class ask(Cog_Extension):
 
                             #Edit to new page + the center counter changes
                             await interaction.respond(
-                                type = 4,
+                                type = 5,
                                 embed = paginationList[current],
                                 components = [ #Use any button style you wish to :)
                                     [
