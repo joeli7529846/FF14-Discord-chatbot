@@ -43,9 +43,9 @@ class ask(Cog_Extension):
 
             df =  ws.get_as_df(empty_value='', include_tailing_empty=False)
             #df 存成字典格式
-            qa_dict =  pd.Series(df.answer.values,index=df.question).to_dict()
-            question_list =  df["question"].tolist()
-            await asyncio.sleep(1)
+            qa_dict =  await pd.Series(df.answer.values,index=df.question).to_dict()
+            question_list =  await df["question"].tolist()
+            
             return qa_dict,question_list
             
             
