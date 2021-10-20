@@ -53,7 +53,7 @@ class ask(Cog_Extension):
         word = ctx.message.content.replace("/ask ","")
         
         #先從questionlist搜尋相似的問題
-        wordsim_list = difflib.get_close_matches(word,self.question_list,20,cutoff=0.2)
+        wordsim_list = difflib.get_close_matches(word,self.question_list,50,cutoff=0.2)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
             if "macro" in wordsim_list[0]:
@@ -119,7 +119,7 @@ class ask(Cog_Extension):
                             interaction = await self.bot.wait_for(
                                 "button_click",
                                 check = lambda i: i.component.id in ["back", "front"], #You can add more
-                                timeout = 10.0 #10 seconds of inactivity
+                                timeout = 18.0 #10 seconds of inactivity
                             )
                             #Getting the right list index
                             if interaction.component.id == "back":
