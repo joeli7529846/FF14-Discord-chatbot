@@ -139,7 +139,7 @@ class ask(Cog_Extension):
 
                             #Edit to new page + the center counter changes
                             await interaction.respond(
-                                type = 6,
+                                type = 7,
                                 embed = paginationList[current],
                                 components = [ #Use any button style you wish to :)
                                     [
