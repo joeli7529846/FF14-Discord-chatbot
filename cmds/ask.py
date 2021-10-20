@@ -8,7 +8,6 @@ from random import choice
 import numpy as np
 import math
 from discord_components import DiscordComponents, Button, ButtonStyle
-from discord_components.interaction import InteractionType
 import asyncio
 
 class ask(Cog_Extension):
