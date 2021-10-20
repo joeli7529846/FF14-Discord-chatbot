@@ -49,7 +49,7 @@ class ask(Cog_Extension):
         word = ctx.message.content.replace("/ask ","")
         
         #先從questionlist搜尋相似的問題
-        wordsim_list = difflib.get_close_matches(word,self.question_list,5,cutoff=0.2)
+        wordsim_list = difflib.get_close_matches(word,self.question_list,20,cutoff=0.2)
         if len(wordsim_list) == 1:
             embed.description = self.qa_dict[wordsim_list[0]]
             if "macro" in wordsim_list[0]:
@@ -66,10 +66,10 @@ class ask(Cog_Extension):
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             else:
-                print(len(wordsim_list))
+                # print(len(wordsim_list))
                 page_num = math.ceil(len(wordsim_list)/5) 
                 if len(wordsim_list) > 5:
-                    print(len(wordsim_list))
+                    # print(len(wordsim_list))
                     #建立每頁的embed
                     #wordsim_list分割page
                     pages_list = np.array_split(wordsim_list, page_num)
