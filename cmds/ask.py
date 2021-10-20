@@ -5,6 +5,8 @@ import discord
 import pygsheets
 import difflib
 from random import choice
+import numpy as np
+import math
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -64,8 +66,57 @@ class ask(Cog_Extension):
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             else:
-                embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
-                await ctx.message.reply(embed=embed, mention_author=True)
+                page_num = math.ceil(len(wordsim_list)) 
+                if len(wordsim_list) > 5:
+                    #建立每頁的embed
+                    #wordsim_list分割page
+                    pages_list = np.array_split(wordsim_list, page_num)
+                    result_list = []
+                    for page_list in pages_list:
+                        page = discord.Embed (
+                            title = '你可能要查詢的詞',
+                            description = "\n".join(page_list),
+                            colour = discord.Colour.orange()
+                        )
+                    result_list.append(page)
+                    message = await self.bot.say(embed = result_list[0])
+
+                    await self.bot.add_reaction(message, '⏮')
+                    await self.bot.add_reaction(message, '◀')
+                    await self.bot.add_reaction(message, '▶')
+                    await self.bot.add_reaction(message, '⏭')
+
+                    i = 0
+                    emoji = ''
+
+                    while True:
+                        if emoji == '⏮':
+                            i = 0
+                            await self.bot.edit_message(message, embed = result_list[i])
+                        elif emoji == '◀':
+                            if i > 0:
+                                i -= 1
+                                await self.bot.edit_message(message, embed = result_list[i])
+                        elif emoji == '▶':
+                            if i < 2:
+                                i += 1
+                                await self.bot.edit_message(message, embed = result_list[i])
+                        elif emoji == '⏭':
+                            i = 2
+                            await self.bot.edit_message(message, embed=result_list[i])
+                        
+                        res = await self.bot.wait_for_reaction(message = message, timeout = 30.0)
+                        if res == None:
+                            break
+                        if str(res[1]) != '<Bots name goes here>':  #Example: 'MyBot#1111'
+                            emoji = str(res[0].emoji)
+                            await self.bot.remove_reaction(message, res[0].emoji, res[1])
+
+                    await self.bot.clear_reactions(message)
+
+                else:
+                    embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
+                    await ctx.message.reply(embed=embed, mention_author=True)
         else:
             await ctx.message.reply(choice(self.idn))
         
