@@ -41,7 +41,7 @@ class ask(Cog_Extension):
 
         ws =  sh.worksheet_by_title('FF14 QA')
 
-        df =  ws.get_as_df(empty_value='', include_tailing_empty=False)
+        df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True)
         #df 存成字典格式
         qa_dict =   pd.Series(df.answer.values,index=df.question).to_dict()
         question_list =  df["question"].tolist()
@@ -52,7 +52,7 @@ class ask(Cog_Extension):
             
     
     
-    @commands.command(name = "pagination",aliases = ["pages"])
+    @commands.command()
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
