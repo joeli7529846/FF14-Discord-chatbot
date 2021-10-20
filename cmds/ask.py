@@ -52,7 +52,8 @@ class ask(Cog_Extension):
             
     
     
-    @commands.command()
+    @commands.command(name = "pagination",
+    aliases = ["pages"])
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
@@ -95,7 +96,6 @@ class ask(Cog_Extension):
                     #Sending first message
                     #I used ctx.reply, you can use simply send as well
                     mainMessage = await ctx.reply(
-                        "**Pagination!**",
                         embed = paginationList[current],
                         components = [ #Use any button style you wish to :)
                             [
