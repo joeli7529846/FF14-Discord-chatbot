@@ -107,7 +107,7 @@ class ask(Cog_Extension):
                             i = 2
                             await ctx.message.edit_message(message, embed=result_list[i])
                         
-                        res = await ctx.message.wait_for_reaction(message = message, timeout = 30.0)
+                        res = await ctx.message.wait_for(message = message, timeout = 30.0)
                         if res == None:
                             break
                         if str(res[1]) != '<Bots name goes here>':  #Example: 'MyBot#1111'
