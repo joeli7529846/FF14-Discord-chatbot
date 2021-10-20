@@ -1,5 +1,5 @@
 import pandas as pd
-from discord.ext import commands
+from discord.ext import commands,tasks
 from core.classes import Cog_Extension
 import discord
 import pygsheets
@@ -13,6 +13,7 @@ import asyncio
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+        self.read_gsheet.start()
         DiscordComponents(self.bot)
         self.qa_dict,self.question_list = ask.read_gsheet(self)
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
@@ -29,6 +30,7 @@ class ask(Cog_Extension):
                   "https://i.imgur.com/TSfPO49.jpg",
                   "http://i.imgur.com/RecpaoD.jpg"]
     
+    @tasks.loop(hours=1)
     def read_gsheet(self):
         gc = pygsheets.authorize(service_account_file='google_apikey.json')
 
@@ -46,7 +48,7 @@ class ask(Cog_Extension):
         return qa_dict,question_list
     
     
-    @commands.command()
+    @commands.command(name = "pagination",aliases = ["pages"])
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
