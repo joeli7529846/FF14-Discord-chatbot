@@ -81,7 +81,7 @@ class ask(Cog_Extension):
                             colour = discord.Colour.orange()
                         )
                     result_list.append(page)
-                    message = await self.bot.say(embed = result_list[0])
+                    message = await ctx.send(embed = result_list[0])
 
                     await self.bot.add_reaction(message, '⏮')
                     await self.bot.add_reaction(message, '◀')
