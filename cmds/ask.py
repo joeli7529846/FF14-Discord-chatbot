@@ -7,12 +7,14 @@ import difflib
 from random import choice
 import numpy as np
 import math
-from discord_components import DiscordComponents, Button, ButtonStyle, InteractionType
+from discord_components import DiscordComponents, Button, ButtonStyle
+from discord_components.interaction import InteractionType
 import asyncio
 
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+        DiscordComponents(self.bot)
         self.qa_dict,self.question_list = ask.read_gsheet(self)
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
@@ -133,7 +135,7 @@ class ask(Cog_Extension):
 
                             #Edit to new page + the center counter changes
                             await interaction.respond(
-                                type = InteractionType.UpdateMessage,
+                                type = 6,
                                 embed = paginationList[current],
                                 components = [ #Use any button style you wish to :)
                                     [
