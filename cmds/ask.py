@@ -70,7 +70,7 @@ class ask(Cog_Extension):
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             else:
-                # print(len(wordsim_list))
+                print(len(wordsim_list))
                 page_num = math.ceil(len(wordsim_list)/5) 
                 if len(wordsim_list) > 5:
                     # print(len(wordsim_list))
