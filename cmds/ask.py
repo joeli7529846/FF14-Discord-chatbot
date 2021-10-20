@@ -32,21 +32,22 @@ class ask(Cog_Extension):
     
     @tasks.loop(hours=1)
     async def read_gsheet(self):
-        while True:
-            gc = pygsheets.authorize(service_account_file='google_apikey.json')
+        
+        gc = pygsheets.authorize(service_account_file='google_apikey.json')
 
-            survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
-            sh = gc.open_by_url(survey_url)
+        survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
+        sh = gc.open_by_url(survey_url)
 
-            ws = sh.worksheet_by_title('FF14 QA')
+        ws = sh.worksheet_by_title('FF14 QA')
 
-            df = ws.get_as_df(empty_value='', include_tailing_empty=False)
-            #df 存成字典格式
-            qa_dict = pd.Series(df.answer.values,index=df.question).to_dict()
-            question_list = df["question"].tolist()
-            await asyncio.sleep(10)
+        df = ws.get_as_df(empty_value='', include_tailing_empty=False)
+        #df 存成字典格式
+        qa_dict = await pd.Series(df.answer.values,index=df.question).to_dict()
+        question_list = await df["question"].tolist()
+        return qa_dict,question_list
             
-            return qa_dict,question_list
+            
+            
     
     
     @commands.command(name = "pagination",aliases = ["pages"])
