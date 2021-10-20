@@ -83,10 +83,10 @@ class ask(Cog_Extension):
                     result_list.append(page)
                     message = await ctx.send(embed = result_list[0])
 
-                    await ctx.message.add_reaction(message, '⏮')
-                    await ctx.message.add_reaction(message, '◀')
-                    await ctx.message.add_reaction(message, '▶')
-                    await ctx.message.add_reaction(message, '⏭')
+                    await ctx.message.add_reaction('⏮')
+                    await ctx.message.add_reaction('◀')
+                    await ctx.message.add_reaction('▶')
+                    await ctx.message.add_reaction('⏭')
 
                     i = 0
                     emoji = ''
