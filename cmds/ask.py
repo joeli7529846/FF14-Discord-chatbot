@@ -7,6 +7,9 @@ import difflib
 from random import choice
 import numpy as np
 import math
+from discord_components import DiscordComponents, Button, ButtonStyle, InteractionType
+import asyncio
+
 class ask(Cog_Extension):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -73,48 +76,113 @@ class ask(Cog_Extension):
                     #建立每頁的embed
                     #wordsim_list分割page
                     pages_list = np.array_split(wordsim_list, page_num)
-                    result_list = []
+                    paginationList = []
                     for page_list in pages_list:
                         page = discord.Embed (
                             title = '你可能要查詢的詞',
                             description = "\n".join(page_list),
                             colour = discord.Colour.orange()
                         )
-                    result_list.append(page)
-                    message = await ctx.send(embed = result_list[0])
-
-                    await ctx.message.reply.add_reaction('⏮')
-                    await ctx.message.reply.add_reaction('◀')
-                    await ctx.message.reply.add_reaction('▶')
-                    await ctx.message.reply.add_reaction('⏭')
-
-                    i = 0
-                    emoji = ''
-
+                    paginationList.append(page)
+                    current = 0
+                    #Sending first message
+                    #I used ctx.reply, you can use simply send as well
+                    mainMessage = await ctx.reply(
+                        "**Pagination!**",
+                        embed = paginationList[current],
+                        components = [ #Use any button style you wish to :)
+                            [
+                                Button(
+                                    label = "Prev",
+                                    id = "back",
+                                    style = ButtonStyle.red
+                                ),
+                                Button(
+                                    label = f"Page {int(paginationList.index(paginationList[current])) + 1}/{len(paginationList)}",
+                                    id = "cur",
+                                    style = ButtonStyle.grey,
+                                    disabled = True
+                                ),
+                                Button(
+                                    label = "Next",
+                                    id = "front",
+                                    style = ButtonStyle.red
+                                )
+                            ]
+                        ]
+                    )
+                    #Infinite loop
                     while True:
-                        if emoji == '⏮':
-                            i = 0
-                            await ctx.message.reply.edit_message(message, embed = result_list[i])
-                        elif emoji == '◀':
-                            if i > 0:
-                                i -= 1
-                                await ctx.message.reply.edit_message(message, embed = result_list[i])
-                        elif emoji == '▶':
-                            if i < 2:
-                                i += 1
-                                await ctx.message.reply.edit_message(message, embed = result_list[i])
-                        elif emoji == '⏭':
-                            i = 2
-                            await ctx.message.reply.edit_message(message, embed=result_list[i])
-                        
-                        res = await ctx.message.reply.wait_for(message = message, timeout = 30.0)
-                        if res == None:
-                            break
-                        if str(res[1]) != '<Bots name goes here>':  #Example: 'MyBot#1111'
-                            emoji = str(res[0].emoji)
-                            await ctx.message.reply.remove_reaction(message, res[0].emoji, res[1])
+                        #Try and except blocks to catch timeout and break
+                        try:
+                            interaction = await ctx.message.wait_for(
+                                "button_click",
+                                check = lambda i: i.component.id in ["back", "front"], #You can add more
+                                timeout = 10.0 #10 seconds of inactivity
+                            )
+                            #Getting the right list index
+                            if interaction.component.id == "back":
+                                current -= 1
+                            elif interaction.component.id == "front":
+                                current += 1
+                            #If its out of index, go back to start / end
+                            if current == len(paginationList):
+                                current = 0
+                            elif current < 0:
+                                current = len(paginationList) - 1
 
-                    await ctx.message.reply.clear_reactions(message)
+                            #Edit to new page + the center counter changes
+                            await interaction.respond(
+                                type = InteractionType.UpdateMessage,
+                                embed = paginationList[current],
+                                components = [ #Use any button style you wish to :)
+                                    [
+                                        Button(
+                                            label = "Prev",
+                                            id = "back",
+                                            style = ButtonStyle.red
+                                        ),
+                                        Button(
+                                            label = f"Page {int(paginationList.index(paginationList[current])) + 1}/{len(paginationList)}",
+                                            id = "cur",
+                                            style = ButtonStyle.grey,
+                                            disabled = True
+                                        ),
+                                        Button(
+                                            label = "Next",
+                                            id = "front",
+                                            style = ButtonStyle.red
+                                        )
+                                    ]
+                                ]
+                            )
+                        except asyncio.TimeoutError:
+                            #Disable and get outta here
+                            await mainMessage.edit(
+                                components = [
+                                    [
+                                        Button(
+                                            label = "Prev",
+                                            id = "back",
+                                            style = ButtonStyle.red,
+                                            disabled = True
+                                        ),
+                                        Button(
+                                            label = f"Page {int(paginationList.index(paginationList[current])) + 1}/{len(paginationList)}",
+                                            id = "cur",
+                                            style = ButtonStyle.grey,
+                                            disabled = True
+                                        ),
+                                        Button(
+                                            label = "Next",
+                                            id = "front",
+                                            style = ButtonStyle.red,
+                                            disabled = True
+                                        )
+                                    ]
+                                ]
+                            )
+                            break  
 
                 else:
                     embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
