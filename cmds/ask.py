@@ -83,10 +83,10 @@ class ask(Cog_Extension):
                     result_list.append(page)
                     message = await ctx.send(embed = result_list[0])
 
-                    await self.bot.add_reaction(message, '⏮')
-                    await self.bot.add_reaction(message, '◀')
-                    await self.bot.add_reaction(message, '▶')
-                    await self.bot.add_reaction(message, '⏭')
+                    await ctx.message.add_reaction(message, '⏮')
+                    await ctx.message.add_reaction(message, '◀')
+                    await ctx.message.add_reaction(message, '▶')
+                    await ctx.message.add_reaction(message, '⏭')
 
                     i = 0
                     emoji = ''
@@ -94,27 +94,27 @@ class ask(Cog_Extension):
                     while True:
                         if emoji == '⏮':
                             i = 0
-                            await self.bot.edit_message(message, embed = result_list[i])
+                            await ctx.message.edit_message(message, embed = result_list[i])
                         elif emoji == '◀':
                             if i > 0:
                                 i -= 1
-                                await self.bot.edit_message(message, embed = result_list[i])
+                                await ctx.message.edit_message(message, embed = result_list[i])
                         elif emoji == '▶':
                             if i < 2:
                                 i += 1
-                                await self.bot.edit_message(message, embed = result_list[i])
+                                await ctx.message.edit_message(message, embed = result_list[i])
                         elif emoji == '⏭':
                             i = 2
-                            await self.bot.edit_message(message, embed=result_list[i])
+                            await ctx.message.edit_message(message, embed=result_list[i])
                         
-                        res = await self.bot.wait_for_reaction(message = message, timeout = 30.0)
+                        res = await ctx.message.wait_for_reaction(message = message, timeout = 30.0)
                         if res == None:
                             break
                         if str(res[1]) != '<Bots name goes here>':  #Example: 'MyBot#1111'
                             emoji = str(res[0].emoji)
-                            await self.bot.remove_reaction(message, res[0].emoji, res[1])
+                            await ctx.message.remove_reaction(message, res[0].emoji, res[1])
 
-                    await self.bot.clear_reactions(message)
+                    await ctx.message.clear_reactions(message)
 
                 else:
                     embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
