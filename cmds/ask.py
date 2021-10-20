@@ -1,3 +1,4 @@
+from time import sleep, time
 import pandas as pd
 from discord.ext import commands,tasks
 from core.classes import Cog_Extension
@@ -36,14 +37,15 @@ class ask(Cog_Extension):
         gc = await pygsheets.authorize(service_account_file='google_apikey.json')
 
         survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
-        sh = await gc.open_by_url(survey_url)
+        sh =  gc.open_by_url(survey_url)
 
-        ws = await sh.worksheet_by_title('FF14 QA')
+        ws =  sh.worksheet_by_title('FF14 QA')
 
-        df = await ws.get_as_df(empty_value='', include_tailing_empty=False)
+        df =  ws.get_as_df(empty_value='', include_tailing_empty=False)
         #df 存成字典格式
-        qa_dict = await pd.Series(df.answer.values,index=df.question).to_dict()
-        question_list = await df["question"].tolist()
+        qa_dict =  pd.Series(df.answer.values,index=df.question).to_dict()
+        question_list =  df["question"].tolist()
+        await time.sleep(1)
         return qa_dict,question_list
             
             
