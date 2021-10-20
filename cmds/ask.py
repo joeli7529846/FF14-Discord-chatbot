@@ -66,8 +66,9 @@ class ask(Cog_Extension):
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             else:
-                page_num = math.ceil(len(wordsim_list)) 
+                page_num = math.ceil(len(wordsim_list)/5) 
                 if len(wordsim_list) > 5:
+                    print(len(wordsim_list))
                     #建立每頁的embed
                     #wordsim_list分割page
                     pages_list = np.array_split(wordsim_list, page_num)
