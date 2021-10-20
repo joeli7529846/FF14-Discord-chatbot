@@ -70,7 +70,7 @@ class ask(Cog_Extension):
                 else:
                     await ctx.message.reply(self.qa_dict[wordsim_list[0]], mention_author=True)
             else:
-                print(len(wordsim_list))
+                
                 page_num = math.ceil(len(wordsim_list)/5) 
                 if len(wordsim_list) > 5:
                     # print(len(wordsim_list))
@@ -84,7 +84,7 @@ class ask(Cog_Extension):
                             description = "\n".join(page_list),
                             colour = discord.Colour.orange()
                         )
-                    paginationList.append(page)
+                        paginationList.append(page)
                     current = 0
                     #Sending first message
                     #I used ctx.reply, you can use simply send as well
