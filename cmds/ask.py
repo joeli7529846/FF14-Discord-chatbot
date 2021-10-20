@@ -116,7 +116,7 @@ class ask(Cog_Extension):
                     while True:
                         #Try and except blocks to catch timeout and break
                         try:
-                            interaction = await ctx.message.wait_for(
+                            interaction = await self.bot.wait_for(
                                 "button_click",
                                 check = lambda i: i.component.id in ["back", "front"], #You can add more
                                 timeout = 10.0 #10 seconds of inactivity
