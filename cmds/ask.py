@@ -33,20 +33,20 @@ class ask(Cog_Extension):
     
     @tasks.loop(hours=1)
     async def read_gsheet(self):
-        
-        gc = await pygsheets.authorize(service_account_file='google_apikey.json')
+        while True:
+            gc =  pygsheets.authorize(service_account_file='google_apikey.json')
 
-        survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
-        sh =  gc.open_by_url(survey_url)
+            survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
+            sh =  gc.open_by_url(survey_url)
 
-        ws =  sh.worksheet_by_title('FF14 QA')
+            ws =  sh.worksheet_by_title('FF14 QA')
 
-        df =  ws.get_as_df(empty_value='', include_tailing_empty=False)
-        #df 存成字典格式
-        qa_dict =  pd.Series(df.answer.values,index=df.question).to_dict()
-        question_list =  df["question"].tolist()
-        await time.sleep(1)
-        return qa_dict,question_list
+            df =  ws.get_as_df(empty_value='', include_tailing_empty=False)
+            #df 存成字典格式
+            qa_dict =  pd.Series(df.answer.values,index=df.question).to_dict()
+            question_list =  df["question"].tolist()
+            await asyncio.sleep(1)
+            return qa_dict,question_list
             
             
             
