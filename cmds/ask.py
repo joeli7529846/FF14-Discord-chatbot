@@ -31,7 +31,7 @@ class ask(Cog_Extension):
                   "http://i.imgur.com/RecpaoD.jpg"]
     
     @tasks.loop(hours=1)
-    def read_gsheet(self):
+    async def read_gsheet(self):
         gc = pygsheets.authorize(service_account_file='google_apikey.json')
 
         survey_url = 'https://docs.google.com/spreadsheets/d/1C62JiqFM-KPMlwTwFCaH1qutYOexXRo-dxPmtBidfJ0/edit#gid=0'
@@ -48,7 +48,7 @@ class ask(Cog_Extension):
         return qa_dict,question_list
     
     
-    @commands.command()
+    @commands.command(name = "pagination",aliases = ["pages"])
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
