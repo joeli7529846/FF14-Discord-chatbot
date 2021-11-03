@@ -41,7 +41,7 @@ class ask(Cog_Extension):
 
         ws =  sh.worksheet_by_title('FF14 QA')
 
-        df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True)
+        df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True,numerize=False)
         #df 存成字典格式
         qa_dict =   pd.Series(df.answer.values,index=df.question).to_dict()
         question_list =  df["question"].tolist()
