@@ -49,22 +49,41 @@ class main(Cog_Extension):
             if user_word in self.item_dict:
                 
                 if "簡體中文" in self.item_dict[user_word]:
-                    
-                    
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]+[f"[詳細資訊連結](https://ff14.huijiwiki.com/wiki/%E7%89%A9%E5%93%81:{self.item_dict[user_word]['簡體中文']})"]
+                    if "ID" in self.item_dict[user_word]:
+                        bs_str = f"[價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
+                    else:
+                        bs_str = "無拍賣資訊"
+                    embed=discord.Embed(title=user_word, 
+                                color=discord.Color.blue())
+                    embed.add_field(name="各國翻譯", 
+                            value="\n".join(user_wordlist), 
+                            inline=False)
+                    embed.add_field(name="拍賣價格", 
+                            value=bs_str, 
+                            inline=False)
                     
-                    embed.description = "\n".join(user_wordlist)
                     embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
                     await message.reply(embed=embed, mention_author=True)
                     # await message.channel.send(embed=embed)
                     
                 else:
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]+[f"[詳細資訊連結](https://ff14.huijiwiki.com/wiki/%E7%89%A9%E5%93%81:{user_word})"]
-                    embed.description = "\n".join(user_wordlist)
+                    if "ID" in self.item_dict[user_word]:
+                        bs_str = f"[價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
+                    else:
+                        bs_str = "無拍賣資訊"
+                    embed=discord.Embed(title=user_word, 
+                                color=discord.Color.blue())
+                    embed.add_field(name="各國翻譯", 
+                            value="\n".join(user_wordlist), 
+                            inline=False)
+                    embed.add_field(name="拍賣價格", 
+                            value=bs_str, 
+                            inline=False)
+                    
                     embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
                     await message.reply(embed=embed, mention_author=True)
-
-                    # await message.channel.send(embed=embed)
                     
             else:
                 wordsim_list = difflib.get_close_matches(user_word,self.wordlist,10,cutoff=0.1)
@@ -75,30 +94,30 @@ class main(Cog_Extension):
                 else:
                     await message.channel.send("無相關資訊")
 
-        #查市價
-        elif message.content.startswith('?bs '):
-            user_word = message.content.replace('?bs ',"")
-            user_word = user_word.lstrip().rstrip()
-            if user_word in self.item_dict:
-                if "ID" in self.item_dict[user_word]:
-                    embed.description = f"[{user_word}價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
-                    embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
-                    await message.reply(embed=embed, mention_author=True)
+        # #查市價
+        # elif message.content.startswith('?bs '):
+        #     user_word = message.content.replace('?bs ',"")
+        #     user_word = user_word.lstrip().rstrip()
+        #     if user_word in self.item_dict:
+        #         if "ID" in self.item_dict[user_word]:
+        #             embed.description = f"[{user_word}價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
+        #             embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
+        #             await message.reply(embed=embed, mention_author=True)
 
-                else:
-                    embed.description = f"[{user_word}價格網址](https://universalis.app/market/{user_word})"
-                    embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
-                    await message.reply(embed=embed, mention_author=True)
+        #         else:
+        #             embed.description = f"[{user_word}價格網址](https://universalis.app/market/{user_word})"
+        #             embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
+        #             await message.reply(embed=embed, mention_author=True)
 
-            else:
-                wordsim_list = difflib.get_close_matches(user_word,self.wordlist,10,cutoff=0.1)
-                if len(wordsim_list) > 0:
-                    embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
+        #     else:
+        #         wordsim_list = difflib.get_close_matches(user_word,self.wordlist,10,cutoff=0.1)
+        #         if len(wordsim_list) > 0:
+        #             embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
                     
-                    await message.reply(embed=embed, mention_author=True)
+        #             await message.reply(embed=embed, mention_author=True)
 
-                else:
-                    await message.reply("無相關資訊")
+        #         else:
+        #             await message.reply("無相關資訊")
 
        
 
