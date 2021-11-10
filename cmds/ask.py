@@ -101,8 +101,35 @@ class ask(Cog_Extension):
             await ctx.message.reply(embed=embed, mention_author=True)
         
         elif len(wordsim_list) > 1:
-            embed.description ="你可能要查詢的名片:\n"+"\n".join(wordsim_list)
-            await ctx.message.reply(embed=embed, mention_author=True)
+            if word in wordsim_list:
+                embed=discord.Embed(title=word, 
+                        color=discord.Color.gold())
+                embed.add_field(name="職業", 
+                        value=self.info_dict[word]["職業"], 
+                        inline=False)
+                embed.add_field(name="攻擊", 
+                        value=self.info_dict[word]["攻擊"], 
+                        inline=True)
+                embed.add_field(name="防禦", 
+                        value=self.info_dict[word]["防禦"], 
+                        inline=True)
+                embed.add_field(name="色色", 
+                        value=self.info_dict[word]["色色"], 
+                        inline=True)
+                embed.add_field(name="出沒地點", 
+                        value=self.info_dict[word]["出沒地點"], 
+                        inline=False)
+                embed.add_field(name="介紹", 
+                        value=self.info_dict[word]["介紹"], 
+                        inline=False)
+                
+                embed.set_thumbnail(url = self.info_dict[word]["頭像"])
+                
+                
+                await ctx.message.reply(embed=embed, mention_author=True)
+            else:
+                embed.description ="你可能要查詢的名片:\n"+"\n".join(wordsim_list)
+                await ctx.message.reply(embed=embed, mention_author=True)
             
     
     
