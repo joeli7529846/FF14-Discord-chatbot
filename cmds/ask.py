@@ -16,7 +16,7 @@ class ask(Cog_Extension):
         super().__init__(*args,**kwargs)
         # self.read_gsheet.start()
         DiscordComponents(self.bot)
-        ask.read_gsheet.start()
+        ask.read_gsheet(self).start()
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
                   "https://i.imgur.com/dAV35RN.jpg",
