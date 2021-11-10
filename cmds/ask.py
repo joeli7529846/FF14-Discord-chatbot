@@ -16,7 +16,7 @@ class ask(Cog_Extension):
         super().__init__(*args,**kwargs)
         # self.read_gsheet.start()
         DiscordComponents(self.bot)
-        self.qa_dict,self.question_list,self.info_dict,self.name_list = ask.read_gsheet(self).start()
+        ask.read_gsheet.start()
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
                   "https://i.imgur.com/dAV35RN.jpg",
@@ -63,7 +63,7 @@ class ask(Cog_Extension):
                                     "頭像":row["頭像"],
                                     }
             
-        return qa_dict,question_list,info_dict,name_list
+        return self.qa_dict,self.question_list,self.info_dict,self.name_list
             
     @commands.command()
     #當有訊息時
