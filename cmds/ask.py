@@ -70,33 +70,32 @@ class ask(Cog_Extension):
     async def info(self,ctx):
         embed = discord.Embed()
         word = ctx.message.content.replace("/info ","")
-        print(self.info_dict)
-        print(word)
+        
         #搜尋名稱
         wordsim_list = difflib.get_close_matches(word,self.name_list,50,cutoff=0.4)
         if len(wordsim_list) == 1:
             embed=discord.Embed(title=word, 
                         color=discord.Color.gold())
             embed.add_field(name="職業", 
-                    value=self.info_dict[word["職業"]], 
+                    value=self.info_dict[word]["職業"], 
                     inline=False)
             embed.add_field(name="攻擊", 
-                    value=self.info_dict[word["攻擊"]], 
+                    value=self.info_dict[word]["攻擊"], 
                     inline=True)
             embed.add_field(name="防禦", 
-                    value=self.info_dict[word["防禦"]], 
+                    value=self.info_dict[word]["防禦"], 
                     inline=True)
             embed.add_field(name="色色", 
-                    value=self.info_dict[word["色色"]], 
+                    value=self.info_dict[word]["色色"], 
                     inline=True)
             embed.add_field(name="出沒地點", 
-                    value=self.info_dict[word["出沒地點"]], 
+                    value=self.info_dict[word]["出沒地點"], 
                     inline=False)
             embed.add_field(name="介紹", 
-                    value=self.info_dict[word["介紹"]], 
+                    value=self.info_dict[word]["介紹"], 
                     inline=False)
             
-            embed.set_thumbnail(url = self.info_dict[word["頭像"]])
+            embed.set_thumbnail(url = self.info_dict[word]["頭像"])
             
             
             await ctx.message.reply(embed=embed, mention_author=True)
