@@ -16,7 +16,7 @@ class ask(Cog_Extension):
         super().__init__(*args,**kwargs)
         # self.read_gsheet.start()
         DiscordComponents(self.bot)
-        self.qa_dict,self.question_list,self.info_dict,self.name_list = ask.read_gsheet(self)
+        self.qa_dict,self.question_list,self.info_dict,self.name_list = ask.read_gsheet(self).start()
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
                   "https://i.imgur.com/dAV35RN.jpg",
@@ -31,7 +31,7 @@ class ask(Cog_Extension):
                   "https://i.imgur.com/TSfPO49.jpg",
                   "http://i.imgur.com/RecpaoD.jpg"]
     
-    
+    @tasks.loop(minutes = 5)
     def read_gsheet(self):
         
         gc =  pygsheets.authorize(service_account_file='google_apikey.json')
