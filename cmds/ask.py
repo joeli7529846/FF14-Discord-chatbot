@@ -16,7 +16,7 @@ class ask(Cog_Extension):
         super().__init__(*args,**kwargs)
         # self.read_gsheet.start()
         DiscordComponents(self.bot)
-        self.qa_dict,self.question_list = ask.read_gsheet(self)
+        self.qa_dict,self.question_list,self.info_dict,self.name_list = ask.read_gsheet(self)
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
                   "https://i.imgur.com/dAV35RN.jpg",
@@ -45,10 +45,64 @@ class ask(Cog_Extension):
         #df 存成字典格式
         qa_dict =   pd.Series(df.answer.values,index=df.question).to_dict()
         question_list =  df["question"].tolist()
+        #讀取成員資訊
+        ws =  sh.worksheet_by_title('成員資訊卡片')
+
+        info_df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True,numerize=False)
+        name_list = self.info_df["名稱"].tolist()
+        info_dict={}
+        for index,row in info_df.iterrows():
+            
+            info_dict[row["名稱"]]={"職業":row["職業"],
+                                    "出沒地點":row["出沒地點"],
+                                    "攻擊":row["攻擊"],
+                                    "防禦":row["防禦"],
+                                    "防禦":row["防禦"],
+                                    "色色":row["色色"],
+                                    "介紹":row["介紹"],
+                                    "頭像":row["頭像"],
+                                    }
+            
+        return qa_dict,question_list,info_dict,name_list
+            
+    @commands.command()
+    #當有訊息時
+    async def info(self,ctx):
+        embed = discord.Embed()
+        word = ctx.message.content.replace("/info ","")
         
-        return qa_dict,question_list
+        #搜尋名稱
+        wordsim_list = difflib.get_close_matches(word,self.name_list,50,cutoff=0.4)
+        if len(wordsim_list) == 1:
+            embed=discord.Embed(title=word, 
+                        color=discord.Color.pink())
+            embed.add_field(name="職業", 
+                    value=self.info_dict[word["職業"]], 
+                    inline=False)
+            embed.add_field(name="攻擊", 
+                    value=self.info_dict[word["攻擊"]], 
+                    inline=True)
+            embed.add_field(name="防禦", 
+                    value=self.info_dict[word["防禦"]], 
+                    inline=True)
+            embed.add_field(name="色色", 
+                    value=self.info_dict[word["色色"]], 
+                    inline=True)
+            embed.add_field(name="出沒地點", 
+                    value=self.info_dict[word["出沒地點"]], 
+                    inline=False)
+            embed.add_field(name="介紹", 
+                    value=self.info_dict[word["介紹"]], 
+                    inline=False)
+            
+            embed.set_thumbnail(url = self.info_dict[word["頭像"]])
             
             
+            await ctx.message.reply(embed=embed, mention_author=True)
+        
+        elif len(wordsim_list) > 1:
+            embed.description ="你可能要查詢的名片:\n"+"\n".join(wordsim_list)
+            await ctx.message.reply(embed=embed, mention_author=True)
             
     
     
