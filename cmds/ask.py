@@ -75,7 +75,7 @@ class ask(Cog_Extension):
         wordsim_list = difflib.get_close_matches(word,self.name_list,50,cutoff=0.4)
         if len(wordsim_list) == 1:
             embed=discord.Embed(title=word, 
-                        color=discord.Color.pink())
+                        color=discord.Color.gold())
             embed.add_field(name="職業", 
                     value=self.info_dict[word["職業"]], 
                     inline=False)
