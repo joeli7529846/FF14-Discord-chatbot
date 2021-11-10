@@ -16,7 +16,7 @@ class ask(Cog_Extension):
         super().__init__(*args,**kwargs)
         # self.read_gsheet.start()
         DiscordComponents(self.bot)
-        ask.read_gsheet(self).start()
+        self.qa_dict,self.question_list,self.info_dict,self.name_list = ask.read_gsheet(self).start()
         self.idn=["https://i.imgur.com/M9hQgZC.gif",
                   "https://i.imgur.com/2VXiwMW.jpg",
                   "https://i.imgur.com/dAV35RN.jpg",
@@ -31,8 +31,8 @@ class ask(Cog_Extension):
                   "https://i.imgur.com/TSfPO49.jpg",
                   "http://i.imgur.com/RecpaoD.jpg"]
     
-    @tasks.loop(minutes = 5)
-    async def read_gsheet(self):
+    
+    def read_gsheet(self):
         
         gc =  pygsheets.authorize(service_account_file='google_apikey.json')
 
@@ -63,7 +63,7 @@ class ask(Cog_Extension):
                                     "頭像":row["頭像"],
                                     }
             
-        return self.qa_dict,self.question_list,self.info_dict,self.name_list
+        return qa_dict,question_list,info_dict,name_list
             
     @commands.command()
     #當有訊息時
