@@ -32,7 +32,7 @@ class ask(Cog_Extension):
                   "http://i.imgur.com/RecpaoD.jpg"]
     
     @tasks.loop(minutes = 5)
-    def read_gsheet(self):
+    async def read_gsheet(self):
         
         gc =  pygsheets.authorize(service_account_file='google_apikey.json')
 
