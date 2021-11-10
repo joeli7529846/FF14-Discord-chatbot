@@ -70,7 +70,8 @@ class ask(Cog_Extension):
     async def info(self,ctx):
         embed = discord.Embed()
         word = ctx.message.content.replace("/info ","")
-        
+        print(self.info_dict)
+        print(word)
         #搜尋名稱
         wordsim_list = difflib.get_close_matches(word,self.name_list,50,cutoff=0.4)
         if len(wordsim_list) == 1:
