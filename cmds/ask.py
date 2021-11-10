@@ -49,7 +49,7 @@ class ask(Cog_Extension):
         ws =  sh.worksheet_by_title('成員資訊卡片')
 
         info_df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True,numerize=False)
-        name_list = self.info_df["名稱"].tolist()
+        name_list = info_df["名稱"].tolist()
         info_dict={}
         for index,row in info_df.iterrows():
             
