@@ -86,7 +86,7 @@ class main(Cog_Extension):
                             value="\n".join(user_wordlist), 
                             inline=False)
                     embed.add_field(name="中文wiki", 
-                            value=f"[詳細資訊連結](https://ff14.huijiwiki.com/wiki/%E7%89%A9%E5%93%81:{self.item_dict[user_word]['簡體中文']})", 
+                            value=f"[詳細資訊連結](https://ff14.huijiwiki.com/wiki/%E7%89%A9%E5%93%81:{user_word})", 
                             inline=True)
                     embed.add_field(name="英文wiki", 
                             value=f"[詳細資訊連結](https://ffxiv.gamerescape.com/wiki/{self.item_dict[user_word]['英文'].replace(' ','_')})", 
