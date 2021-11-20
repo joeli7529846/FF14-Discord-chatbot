@@ -78,7 +78,8 @@ class main(Cog_Extension):
                     embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
                     await message.reply(embed=embed, mention_author=True)
                     # await message.channel.send(embed=embed)
-                elif "簡體中文" in self.item_dict[user_word]:
+                
+                elif "英文" in self.item_dict[user_word]:
                     print(self.item_dict[user_word])
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]
                     if "ID" in self.item_dict[user_word]:
@@ -96,7 +97,7 @@ class main(Cog_Extension):
                             inline=True)
                     
                     embed.add_field(name="英文wiki", 
-                            value=f"[詳細資訊連結](https://ffxiv.gamerescape.com/wiki/{self.item_dict[user_word]['英文'].replace(' ','_')})", 
+                            value=f"[詳細資訊連結](https://ffxiv.gamerescape.com/wiki/{user_word})", 
                             inline=True)
                     
                     embed.add_field(name="拍賣價格", 
