@@ -79,7 +79,7 @@ class main(Cog_Extension):
                     await message.reply(embed=embed, mention_author=True)
                     # await message.channel.send(embed=embed)
                 
-                elif "英文" in self.item_dict[user_word]:
+                elif "英文" not in self.item_dict[user_word]:
                     print(self.item_dict[user_word])
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]
                     if "ID" in self.item_dict[user_word]:
