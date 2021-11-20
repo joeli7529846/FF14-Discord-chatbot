@@ -73,7 +73,30 @@ class main(Cog_Extension):
                     embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
                     await message.reply(embed=embed, mention_author=True)
                     # await message.channel.send(embed=embed)
+                
+                elif "英文" in self.item_dict[user_word]:
+                    user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]
+                    if "ID" in self.item_dict[user_word]:
+                        bs_str = f"[價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
+                    else:
+                        bs_str = "無拍賣資訊"
+                    embed=discord.Embed(title=user_word, 
+                                color=discord.Color.blue())
+                    embed.add_field(name="各國翻譯", 
+                            value="\n".join(user_wordlist), 
+                            inline=False)
+                    embed.add_field(name="中文wiki", 
+                            value=f"[詳細資訊連結](https://ff14.huijiwiki.com/wiki/%E7%89%A9%E5%93%81:{self.item_dict[user_word]['簡體中文']})", 
+                            inline=True)
+                    embed.add_field(name="英文wiki", 
+                            value=f"[詳細資訊連結](https://ffxiv.gamerescape.com/wiki/{user_word.replace(' ','_')})", 
+                            inline=True)
+                    embed.add_field(name="拍賣價格", 
+                            value=bs_str, 
+                            inline=False)
                     
+                    embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
+                    await message.reply(embed=embed, mention_author=True)
                 else:
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]
                     if "ID" in self.item_dict[user_word]:
