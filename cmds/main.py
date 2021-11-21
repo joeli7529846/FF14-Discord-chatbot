@@ -47,11 +47,9 @@ class main(Cog_Extension):
             user_word = user_word.lstrip().rstrip()
             
             if user_word in self.item_dict:
-                
-                
-                
+
                 if "簡體中文" and "英文" in self.item_dict[user_word]:
-                    # print(self.item_dict[user_word])
+                    print(self.item_dict[user_word])
                     user_wordlist = [f"{key} : {value}" for key,value in self.item_dict[user_word].items()]
                     if "ID" in self.item_dict[user_word]:
                         bs_str = f"[價格網址](https://universalis.app/market/{self.item_dict[user_word]['ID']})"
