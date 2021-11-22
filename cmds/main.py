@@ -41,7 +41,7 @@ class main(Cog_Extension):
         #排除自己的訊息，避免陷入無限循環
         if message.author == self.bot.user:
             return
-        print(message.channel.id)
+        # print(message.channel.id)
         if message.channel.id == int(912076442500755556):
             if len(message.attachments) > 0: #Checks if there are attachments
                 pic_ext = ['.jpg','.png','.jpeg']
