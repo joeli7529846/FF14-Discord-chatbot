@@ -127,6 +127,8 @@ class main(Cog_Extension):
                 if len(wordsim_list) > 0:
                     embed.description ="你可能要查詢的詞:\n"+"\n".join(wordsim_list)
                     await message.channel.send(embed=embed)
+                    await asyncio.sleep(20)
+                    await message.delete()
                 else:
                     await message.channel.send("無相關資訊")
 
