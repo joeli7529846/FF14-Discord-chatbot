@@ -47,8 +47,8 @@ class main(Cog_Extension):
                 pic_ext = ['.jpg','.png','.jpeg']
                 for file in message.attachments:
                     
-                    print(file.filename)
-                    if file.filename[-3:] not in pic_ext:
+                    print(file.filename[-4:])
+                    if file.filename[-4:] not in pic_ext:
                         await asyncio.sleep(2)
                         await message.delete()
 
