@@ -41,7 +41,9 @@ class main(Cog_Extension):
         #排除自己的訊息，避免陷入無限循環
         if message.author == self.bot.user:
             return
+        print(message.channel)
         if message.channel == int(912076442500755556):
+            print(message.content[:-3])
             if message.content[:-3] != "jpg"or message.content[:-3] != "png":
                 await message.delete()
 
