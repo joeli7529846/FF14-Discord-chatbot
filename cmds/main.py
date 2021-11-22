@@ -3,7 +3,7 @@ import discord
 import difflib
 from discord.ext import commands
 from core.classes import Cog_Extension
-
+import asyncio
 
 class main(Cog_Extension):
 
@@ -44,7 +44,8 @@ class main(Cog_Extension):
         print(message.channel)
         if message.channel.id == int(912076442500755556):
             print(message.content[:-3])
-            if message.content[:-3] != "jpg"or message.content[:-3] != "png":
+            if message.content[:-3] != "jpg" or message.content[:-3] != "png":
+                await asyncio.sleep(3)
                 await message.delete()
 
         #翻譯
