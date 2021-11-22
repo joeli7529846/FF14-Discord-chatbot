@@ -44,7 +44,7 @@ class main(Cog_Extension):
         # print(message.channel.id)
         if message.channel.id == int(912076442500755556):
             if len(message.attachments) > 0: #Checks if there are attachments
-                pic_ext = ['.jpg','.png','.jpeg','gif']
+                pic_ext = ['.jpg','.png','.jpeg','.gif']
                 for file in message.attachments:
                     if file.filename[-4:] not in pic_ext:
                         await asyncio.sleep(2)
