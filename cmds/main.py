@@ -46,11 +46,11 @@ class main(Cog_Extension):
             if len(message.attachments) > 0: #Checks if there are attachments
                 pic_ext = ['.jpg','.png','.jpeg']
                 for file in message.attachments:
-                    for ext in pic_ext:
-                        print(file.filename)
-                        if not file.filename.endswith(ext):
-                            await asyncio.sleep(2)
-                            await message.delete()
+                    
+                    print(file.filename)
+                    if file.filename[-3:] not in pic_ext:
+                        await asyncio.sleep(2)
+                        await message.delete()
 
         #翻譯
         if message.content.startswith('?tr '):
