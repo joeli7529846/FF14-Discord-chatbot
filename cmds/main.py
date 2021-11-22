@@ -44,8 +44,8 @@ class main(Cog_Extension):
         print(message.channel)
         if message.channel.id == int(912076442500755556):
             print(message.content[:-3])
-            if message.content[:-3] != "jpg" or message.content[:-3] != "png":
-                await asyncio.sleep(3)
+            if message.content[-3:] != "jpg" or message.content[-3:] != "png":
+                await asyncio.sleep(2)
                 await message.delete()
 
         #翻譯
