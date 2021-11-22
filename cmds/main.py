@@ -32,6 +32,7 @@ class main(Cog_Extension):
         channel = self.bot.get_channel(int(779782707080069193))
         await channel.send(f"<@{member.id}> 你好呀:sunglasses:  請輸入你的遊戲ID，管理員看到就會把你加進公會~")
 
+    
 
     @commands.Cog.listener()
     #當有訊息時
@@ -40,7 +41,10 @@ class main(Cog_Extension):
         #排除自己的訊息，避免陷入無限循環
         if message.author == self.bot.user:
             return
-                
+        if message.channel == int(912076442500755556):
+            if message.content[:-3] != "jpg"or message.content[:-3] != "png":
+                await message.delete()
+
         #翻譯
         if message.content.startswith('?tr '):
             user_word = message.content.replace('?tr ',"")
