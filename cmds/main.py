@@ -51,7 +51,12 @@ class main(Cog_Extension):
                         await message.delete()
                     
             else:
-                if message.content[-4:] not in pic_ext:
+                pic_count = 0
+                for pic in pic_ext:
+                    if pic in message.content:
+                        pic_count+=1
+
+                if pic_count == 0:
                     await asyncio.sleep(2)
                     await message.delete()
 
