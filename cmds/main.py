@@ -38,21 +38,22 @@ class main(Cog_Extension):
     #當有訊息時
     async def on_message(self,message):
         embed = discord.Embed()
+        pic_ext = ['.jpg','.png','.jpeg','.gif']
         #排除自己的訊息，避免陷入無限循環
         if message.author == self.bot.user:
             return
         # print(message.channel.id)
         if message.channel.id == int(912076442500755556):
             if len(message.attachments) > 0: #Checks if there are attachments
-                pic_ext = ['.jpg','.png','.jpeg','.gif']
                 for file in message.attachments:
                     if file.filename[-4:] not in pic_ext:
                         await asyncio.sleep(2)
                         await message.delete()
                     
             else:
-                await asyncio.sleep(2)
-                await message.delete()
+                if message.content[-4:] not in pic_ext:
+                    await asyncio.sleep(2)
+                    await message.delete()
 
         #翻譯
         if message.content.startswith('?tr '):
