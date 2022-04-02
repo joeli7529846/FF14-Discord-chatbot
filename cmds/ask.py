@@ -41,14 +41,14 @@ class ask(Cog_Extension):
 
         ws =  sh.worksheet_by_title('FF14 QA')
 
-        df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True,numerize=False,end="(rows, B)")
+        df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=False,numerize=False,end="(rows, B)")
         #df 存成字典格式
         qa_dict =   pd.Series(df.answer.values,index=df.question).to_dict()
         question_list =  df["question"].tolist()
         #讀取成員資訊
         ws =  sh.worksheet_by_title('成員資訊卡片')
 
-        info_df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=True,numerize=False)
+        info_df =  ws.get_as_df(has_header=True,empty_value='', include_tailing_empty=False,numerize=False)
         name_list = info_df["名稱"].tolist()
         info_dict={}
         for index,row in info_df.iterrows():
