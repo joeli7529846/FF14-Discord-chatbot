@@ -12,6 +12,11 @@ class Cog_Extension(commands.Cog):
         self.TOKEN = os.getenv('DISCORD_TOKEN')
         self.GUILDID_TOKEN = os.getenv('GUILDID_TOKEN')
         #讀取字典
-        with open("item_dict.pkl", "rb") as tf:
-            self.item_dict = pickle.load(tf)
+        with open("item_dict.pkl1", "rb") as tf:
+            self.item_dict1 = pickle.load(tf)
+        with open("item_dict.pkl2", "rb") as tf:
+            self.item_dict2 = pickle.load(tf)
+
+        self.item_dict = {**self.item_dict1, **self.item_dict2}
+        
         self.wordlist = [word for word in self.item_dict]
