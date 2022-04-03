@@ -6,7 +6,8 @@ from core.classes import Cog_Extension
 import asyncio
 import pickle
 class main(Cog_Extension):
-    def __init__(self):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
         with open("item_dict.pkl", "rb") as tf:
             self.item_dict = pickle.load(tf)
         self.wordlist = [word for word in self.item_dict]
