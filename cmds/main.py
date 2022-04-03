@@ -86,7 +86,7 @@ class main(Cog_Extension):
                             value=self.item_dict[user_word]['中文wiki'], 
                             inline=True)
                 embed.add_field(name="拍賣價格", 
-                        value="\n".join(self.item_dict[user_word]['拍賣價格']), 
+                        value=self.item_dict[user_word]['拍賣價格'], 
                         inline=False)
                     
                 embed.set_thumbnail(url = self.item_dict[user_word]['物品圖片'])
