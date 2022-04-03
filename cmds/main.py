@@ -4,8 +4,9 @@ import difflib
 from discord.ext import commands
 from core.classes import Cog_Extension
 import asyncio
-
+import pickle
 class main(Cog_Extension):
+    
 
     #調用event函式庫
     @commands.Cog.listener()
@@ -39,6 +40,10 @@ class main(Cog_Extension):
     async def on_message(self,message):
         embed = discord.Embed()
         pic_ext = ['.jpg','.png','.jpeg','.gif']
+        with open("item_dict.pkl", "rb") as tf:
+            self.item_dict = pickle.load(tf)
+        self.wordlist = [word for word in self.item_dict]
+        print("item_dict.pkl complete")
         #排除自己的訊息，避免陷入無限循環
         if message.author == self.bot.user:
             return
