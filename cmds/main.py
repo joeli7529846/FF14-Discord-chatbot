@@ -89,7 +89,7 @@ class main(Cog_Extension):
                         value="\n".join(self.item_dict[user_word]['拍賣價格']), 
                         inline=False)
                     
-                embed.set_thumbnail(url = f"https://universalis-ffxiv.github.io/universalis-assets/icon2x/{self.item_dict[user_word]['ID']}.png")
+                embed.set_thumbnail(url = self.item_dict[user_word]['物品圖片'])
                 await message.reply(embed=embed, mention_author=True)
                 # await message.channel.send(embed=embed)
                 
