@@ -85,8 +85,8 @@ class main(Cog_Extension):
                             value=self.item_dict[user_word]['中文wiki'], 
                             inline=True)
                 if "英文wiki" in self.item_dict[user_word]:
-                    embed.add_field(name="中文wiki", 
-                            value=self.item_dict[user_word]['中文wiki'], 
+                    embed.add_field(name="英文wiki", 
+                            value=self.item_dict[user_word]['英文wiki'], 
                             inline=True)
                 embed.add_field(name="拍賣價格", 
                         value=self.item_dict[user_word]['拍賣價格'], 
