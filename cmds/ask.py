@@ -69,7 +69,7 @@ class ask(Cog_Extension):
     #當有訊息時
     async def info(self,ctx):
         embed = discord.Embed()
-        word = ctx.message.content.replace("/info ","")
+        word = ctx.message.content.replace("?info ","")
         
         #搜尋名稱
         wordsim_list = difflib.get_close_matches(word,self.name_list,50,cutoff=0.4)
@@ -137,7 +137,7 @@ class ask(Cog_Extension):
     #當有訊息時
     async def ask(self,ctx):
         embed = discord.Embed()
-        word = ctx.message.content.replace("/ask ","")
+        word = ctx.message.content.replace("?ask ","")
         
         #先從questionlist搜尋相似的問題
         wordsim_list = difflib.get_close_matches(word,self.question_list,50,cutoff=0.2)
