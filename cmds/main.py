@@ -32,12 +32,12 @@ class main(Cog_Extension):
         await self.bot.close()
         
     
-    #新成員加入
-    @commands.Cog.listener()
-    #當有訊息時
-    async def on_member_join(self,member):
-        channel = self.bot.get_channel(int(779782707080069193))
-        await channel.send(f"<@{member.id}> 你好呀:sunglasses:  請輸入你的遊戲ID，管理員看到就會把你加進公會~")
+    # #新成員加入
+    # @commands.Cog.listener()
+    # #當有訊息時
+    # async def on_member_join(self,member):
+    #     channel = self.bot.get_channel(int(779782707080069193))
+    #     await channel.send(f"<@{member.id}> 你好呀:sunglasses:  請輸入你的遊戲ID，管理員看到就會把你加進公會~")
 
     
 
